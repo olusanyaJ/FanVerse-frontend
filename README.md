@@ -1,4 +1,4 @@
-# FanVerse-frontend
+# FanVerse
 
 <img width="125" alt="1  Splash Screen" src="https://github.com/olusanyaJ/FanVerse-frontend/assets/145439880/3e0037d8-d391-4893-afe3-e24822b2ec5b"> <img width="125" alt="3  Onboarding - 2" src="https://github.com/olusanyaJ/FanVerse-frontend/assets/145439880/087e0ddc-b3d9-473d-8317-75d0a38a68b6">
 
