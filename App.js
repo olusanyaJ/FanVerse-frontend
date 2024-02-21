@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image } from "react-native";
-import icon from "../FanVerseFrontend/assets/Group3864.png";
 
 export default function App() {
+  console.log("App connected");
+
   return (
     <View style={styles.container}>
-      <Image source={icon} />
+      <Text>FanVerse</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -14,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0F172A",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },
