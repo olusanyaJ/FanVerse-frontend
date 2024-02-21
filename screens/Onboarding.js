@@ -3,6 +3,9 @@ import { FlatList, StyleSheet, View, Animated } from "react-native";
 
 import OnboardingItem from "../components/OnboardingItem";
 import onboardingSlides from "../utils/onboardingSlides";
+import OnboardingPaginator from "../components/OnboardingPaginator";
+import Button from "../components/Button";
+import SkipBtn from "../components/SkipBtn";
 
 export default Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,14 +18,27 @@ export default Onboarding = () => {
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
+  const scrollTo = () => {
+    if (currentIndex < onboardingSlides.length - 1) {
+      onboardingSlidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+    } else {
+      console.log("Last Item");
+    }
+  };
+
+  const onPressSkip = () => {
+    console.log("Skipped");
+  };
+
   return (
     <View style={styles.container}>
+      <SkipBtn onPressSkip={onPressSkip} />
       <View style={{ flex: 3 }}>
         <FlatList
           data={onboardingSlides}
           renderItem={({ item }) => <OnboardingItem item={item} />}
           horizontal
-          showsHorizontalScrollIndicator
+          showsHorizontalScrollIndicator={false}
           pagingEnabled
           bounces={false}
           keyExtractor={(item) => item.id}
@@ -36,6 +52,8 @@ export default Onboarding = () => {
           ref={onboardingSlidesRef}
         />
       </View>
+      <OnboardingPaginator data={onboardingSlides} scrollX={scrollX} />
+      <Button scrollTo={scrollTo} />
     </View>
   );
 };
@@ -45,5 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "#0F172A",
   },
 });
