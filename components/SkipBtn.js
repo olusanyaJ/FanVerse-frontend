@@ -1,39 +1,38 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default SkipButton = ({ onPressSkip }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Pressable style={styles.button} onPress={onPressSkip}>
         <Text style={styles.text}>Skip</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    // alignContent: "flex-end",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    alignSelf: "flex-end",
   },
   button: {
-    // alignItems: "center",
-    // justifyContent: "center",
-    paddingVertical: 12,
-    // width: 100,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    borderColor: "pink",
-    // elevation: 3,
-    backgroundColor: "pink",
+    marginRight: 24,
+    marginTop: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#2D8FFF",
+    gap: 8,
   },
   text: {
-    // fontSize: 16,
-    // lineHeight: 21,
-    // fontWeight: "bold",
-    // letterSpacing: 0.25,
-    // color: "white",
+    fontSize: 12,
+    color: "#2D8FFF",
+    lineHeight: 20,
+    letterSpacing: 0.20000000298023224,
+    fontWeight: 700,
+    // fontFamily: "Manrope",
   },
 });
