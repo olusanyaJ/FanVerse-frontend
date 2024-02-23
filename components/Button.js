@@ -1,37 +1,43 @@
-import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  useWindowDimensions,
+} from "react-native";
 
-export default Button = ({ scrollTo }) => {
+export default Button = ({ buttonText, onPress }) => {
+  const { width } = useWindowDimensions();
+
   return (
-    <View style={styles.container}>
-      <Pressable style={styles.button} onPress={scrollTo}>
-        <Text style={styles.text}>Get Started</Text>
+    <SafeAreaView style={[styles.container, { width }]}>
+      <Pressable style={styles.button} onPress={onPress}>
+        <Text style={styles.text}>{buttonText}</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    width: 100,
   },
   button: {
-    // alignItems: "center",
-    // justifyContent: "center",
-    paddingVertical: 12,
-    // width: 100,
-    // paddingHorizontal: 32,
-    borderRadius: 4,
-    // elevation: 3,
-    backgroundColor: "pink",
+    marginRight: 24,
+    marginLeft: 24,
+    paddingVertical: 15,
+    borderRadius: 12,
+    elevation: 3,
+    backgroundColor: "#E41447",
   },
   text: {
-    // fontSize: 16,
-    // lineHeight: 21,
-    // fontWeight: "bold",
-    // letterSpacing: 0.25,
-    // color: "white",
+    fontSize: 16,
+    textAlign: "center",
+    lineHeight: 26,
+    fontWeight: "700",
+    letterSpacing: 0.4,
+    color: "white",
+    // fontFamily: "Manrope",
   },
 });

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FlatList, StyleSheet, View, Animated } from "react-native";
 
 import OnboardingItem from "../components/OnboardingItem";
@@ -11,6 +11,7 @@ export default Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const onboardingSlidesRef = useRef(null);
+  const totalSlides = onboardingSlides.length;
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -19,15 +20,31 @@ export default Onboarding = () => {
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
   const scrollTo = () => {
-    if (currentIndex < onboardingSlides.length - 1) {
+    if (currentIndex < totalSlides - 1) {
       onboardingSlidesRef.current.scrollToIndex({ index: currentIndex + 1 });
-    } else {
-      console.log("Last Item");
     }
   };
 
   const onPressSkip = () => {
     console.log("Skipped");
+  };
+
+  const [buttonText, setButtonText] = useState("Next");
+
+  useEffect(() => {
+    if (currentIndex === totalSlides - 1) {
+      setButtonText("Get Started");
+    } else {
+      setButtonText("Next");
+    }
+  }, [currentIndex, totalSlides]);
+
+  const onPress = () => {
+    if (currentIndex < totalSlides - 1) {
+      scrollTo();
+    } else {
+      console.log("Last Item");
+    }
   };
 
   return (
@@ -53,7 +70,7 @@ export default Onboarding = () => {
         />
       </View>
       <OnboardingPaginator data={onboardingSlides} scrollX={scrollX} />
-      <Button scrollTo={scrollTo} />
+      <Button scrollTo={scrollTo} onPress={onPress} buttonText={buttonText} />
     </View>
   );
 };
