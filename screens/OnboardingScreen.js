@@ -26,7 +26,7 @@ export default Onboarding = ({ navigation }) => {
   };
 
   const onPressSkip = () => {
-    navigation.navigate("Home");
+    navigation.navigate("SignupScreen");
   };
 
   const [buttonText, setButtonText] = useState("Next");
@@ -43,7 +43,7 @@ export default Onboarding = ({ navigation }) => {
     if (currentIndex < totalSlides - 1) {
       scrollTo();
     } else {
-      navigation.navigate("Home");
+      navigation.navigate("SignupScreen");
     }
   };
 

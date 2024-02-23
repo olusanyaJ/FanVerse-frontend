@@ -13,7 +13,6 @@ export default SkipButton = ({ onPressSkip }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "flex-start",
     alignSelf: "flex-end",
   },
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
     color: "#2D8FFF",
     lineHeight: 20,
     letterSpacing: 0.25,
-    // fontWeight: 700,
-    // fontFamily: "Manrope",
+    fontWeight: 700,
   },
 });

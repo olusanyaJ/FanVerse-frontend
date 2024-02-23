@@ -5,6 +5,7 @@ export default Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.homeText}>FanVerse</Text>
+      <Text>SignUp</Text>
     </SafeAreaView>
   );
 };
