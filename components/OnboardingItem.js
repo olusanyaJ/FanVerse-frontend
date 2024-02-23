@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -28,25 +28,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   lower: {
     padding: 24,
     backgroundColor: "red",
-    // flex: 1,
     flex: 0.3,
   },
   image: {
-    // flex: 0.7,
-    justifyContent: "center",
+    flex: 0.7,
   },
   title: {
-    fontWeight: "700",
     fontSize: 24,
-    // color: "white",
   },
   description: {
     fontWeight: "400",
-    // color: "white",
   },
 });

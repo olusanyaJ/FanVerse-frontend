@@ -7,7 +7,7 @@ import OnboardingPaginator from "../components/OnboardingPaginator";
 import Button from "../components/Button";
 import SkipBtn from "../components/SkipBtn";
 
-export default Onboarding = () => {
+export default Onboarding = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const onboardingSlidesRef = useRef(null);
@@ -26,7 +26,7 @@ export default Onboarding = () => {
   };
 
   const onPressSkip = () => {
-    console.log("Skipped");
+    navigation.navigate("Home");
   };
 
   const [buttonText, setButtonText] = useState("Next");
@@ -43,7 +43,7 @@ export default Onboarding = () => {
     if (currentIndex < totalSlides - 1) {
       scrollTo();
     } else {
-      console.log("Last Item");
+      navigation.navigate("Home");
     }
   };
 
@@ -79,6 +79,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
 });

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     lineHeight: 26,
-    fontWeight: "700",
+    // fontWeight: "700",
     letterSpacing: 0.4,
     color: "white",
     // fontFamily: "Manrope",
