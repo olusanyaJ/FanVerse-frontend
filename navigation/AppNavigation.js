@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignupScreen from "../screens/SignupScreen";
+import GetStartedScreen from "../screens/GetStartedScreen";
 import OnboardingScreen from "../screens/OnboardingScreen";
 
 const Stack = createNativeStackNavigator();
@@ -16,8 +16,8 @@ export default appNaviagtion = () => {
         />
 
         <Stack.Screen
-          name="SignupScreen"
-          component={SignupScreen}
+          name="GetStartedScreen"
+          component={GetStartedScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
