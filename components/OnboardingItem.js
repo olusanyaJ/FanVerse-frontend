@@ -16,10 +16,8 @@ export default OnboardingItem = ({ item }) => {
         source={item.image}
         style={[styles.image, { width, resizeMode: "contain" }]}
       />
-      <View style={styles.lower}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-      </View>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.description}>{item.description}</Text>
     </View>
   );
 };
@@ -27,20 +25,29 @@ export default OnboardingItem = ({ item }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-  },
-  lower: {
-    padding: 24,
-    backgroundColor: "red",
-    flex: 0.3,
   },
   image: {
     flex: 0.7,
   },
   title: {
     fontSize: 24,
+    color: "#F8F9FD",
+    fontWeight: 700,
+    lineHeight: 36,
+    letterSpacing: 0,
+    textAlign: "left",
+    paddingTop: 48,
+    paddingLeft: 24,
+    paddingBottom: 8,
   },
   description: {
     fontWeight: "400",
+    color: "#64748B",
+    fontSize: 14,
+    lineHeight: 24,
+    letterSpacing: 0.3,
+    textAlign: "left",
+    paddingLeft: 24,
+    paddingRight: 24,
   },
 });

@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FlatList, StyleSheet, View, Animated } from "react-native";
-
 import OnboardingItem from "../components/OnboardingItem";
 import onboardingSlides from "../utils/onboardingSlides";
 import OnboardingPaginator from "../components/OnboardingPaginator";
 import Button from "../components/Button";
 import SkipBtn from "../components/SkipBtn";
 
-export default Onboarding = ({ navigation }) => {
+export default OnboardingScreen = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const onboardingSlidesRef = useRef(null);
@@ -78,6 +77,7 @@ export default Onboarding = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
+    backgroundColor: "#0F172A",
   },
 });

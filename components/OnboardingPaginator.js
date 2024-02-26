@@ -5,13 +5,13 @@ export default OnboardingPaginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
 
   return (
-    <View style={{ flexDirection: "row", height: 64 }}>
+    <View style={{ flexDirection: "row", marginLeft: 24 }}>
       {data.map((_, i) => {
         const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
 
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [10, 40, 10],
+          outputRange: [6, 32, 6],
           extrapolate: "clamp",
         });
 
@@ -34,9 +34,9 @@ export default OnboardingPaginator = ({ data, scrollX }) => {
 
 const styles = StyleSheet.create({
   dot: {
-    height: 10,
-    borderRadius: 5,
+    height: 6,
+    borderRadius: 500,
     backgroundColor: "#2D8FFF",
-    marginHorizontal: 8,
+    marginHorizontal: 4,
   },
 });
