@@ -56,7 +56,7 @@ export default GetStartedScreen = ({ navigation }) => {
         </View>
         <View style={styles.bottomContent}>
           <Text style={styles.signInText}>Already have an account?</Text>
-          <Pressable onPress={() => navigation.navigate("OnboardingScreen")}>
+          <Pressable onPress={() => navigation.navigate("LoginScreen")}>
             <Text style={styles.signInLink}> Sign In</Text>
           </Pressable>
         </View>
