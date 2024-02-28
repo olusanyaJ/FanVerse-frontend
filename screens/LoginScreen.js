@@ -3,7 +3,6 @@ import {
   Text,
   StyleSheet,
   View,
-  Image,
   TextInput,
   Pressable,
   TouchableOpacity,
@@ -26,7 +25,7 @@ export default LoginScreen = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [isPasswordShown, setIsPasswordShown] = useState(true);
 
   const onPressSignin = () => {
     console.log("Signin Button Pressed");
@@ -101,7 +100,7 @@ export default LoginScreen = ({ navigation }) => {
 
         <View style={styles.bottomDivide}>
           <View style={styles.lineBreak}></View>
-          <Text> Or sign in with </Text>
+          <Text style={styles.lineBreakText}> Or sign in with </Text>
           <View style={styles.lineBreak}></View>
         </View>
 
@@ -132,8 +131,7 @@ export default LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: COLORS.appBackgroundColor,
-    backgroundColor: "cyan",
+    backgroundColor: COLORS.appBackgroundColor,
   },
   pageContainer: {
     flex: 1,
@@ -147,7 +145,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 700,
     lineHeight: 36,
-    // color: COLORS.primaryTextColor,
+    color: COLORS.primaryTextColor,
+    paddingBottom: 8,
   },
   pageSubtitle: {
     fontFamily: "Manrope-Light",
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     lineHeight: 23.8,
     letterSpacing: 0.3,
-    // color: COLORS.secondaryTextColor,
+    color: COLORS.secondaryTextColor,
   },
   inputContainer: {
     marginBottom: 16,
@@ -166,17 +165,21 @@ const styles = StyleSheet.create({
     borderColor: COLORS.inputBgColor,
     borderWidth: 1,
     borderRadius: 12,
-    alignItems: "center",
     justifyContent: "center",
-    paddingLeft: 24,
+    paddingHorizontal: 16,
     backgroundColor: COLORS.inputBgColor,
   },
   inputPlaceholder: {
     width: "100%",
+    fontFamily: "Manrope-Light",
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
   },
   passwordIcon: {
     position: "absolute",
-    right: 12,
+    right: 16,
   },
   icon: {
     color: COLORS.secondaryTextColor,
@@ -187,7 +190,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   fgtPwdText: {
-    fontFamily: "Manrope-Light",
+    fontFamily: "Manrope-Bold",
     fontSize: 14,
     fontWeight: 600,
     lineHeight: 24,
@@ -204,7 +207,16 @@ const styles = StyleSheet.create({
   lineBreak: {
     flex: 1,
     height: 1,
-    backgroundColor: "grey",
+    backgroundColor: COLORS.lineBreakColor,
+  },
+  lineBreakText: {
+    fontFamily: "Manrope-Regular",
+    fontSize: 12,
+    fontWeight: 400,
+    lineHeight: 20,
+    letterSpacing: 0.2,
+    paddingHorizontal: 12,
+    color: COLORS.secondaryTextColor,
   },
   btnContainer: {
     flexDirection: "row",
@@ -219,18 +231,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 102,
-    // marginBottom: 8,
   },
   signInText: {
-    color: COLORS.appBackgroundColor,
+    fontFamily: "Manrope-Bold",
+    color: COLORS.secondaryTextColor,
     fontSize: 14,
     lineHeight: 24,
     letterSpacing: 0.3,
     fontWeight: 400,
-    textAlign: "center",
   },
   signInLink: {
+    fontFamily: "Manrope-Bold",
     fontWeight: 700,
+    fontSize: 14,
+    lineHeight: 24,
+    letterSpacing: 0.3,
     color: COLORS.thirdTextColor,
   },
 });

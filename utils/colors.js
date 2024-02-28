@@ -6,4 +6,5 @@ export default COLORS = {
   buttonTextColor: "#FFFFFF",
   thirdTextColor: "#2D8FFF",
   inputBgColor: "#1E293B",
+  lineBreakColor: "#334155",
 };

@@ -1,41 +1,51 @@
-import React from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  useWindowDimensions,
-} from "react-native";
+import React, { useCallback } from "react";
+
+import { Pressable, StyleSheet, Text } from "react-native";
+import { useFonts } from "expo-font";
+import COLORS from "../utils/colors";
+
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default Button = ({ buttonText, onPress }) => {
-  const { width } = useWindowDimensions();
+  const [fontsLoaded] = useFonts({
+    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
+  });
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    // <SafeAreaView style={[styles.container, { width }]}>
-    <Pressable style={styles.button} onPress={onPress}>
+    <Pressable
+      style={styles.button}
+      onPress={onPress}
+      onLayout={onLayoutRootView}
+    >
       <Text style={styles.text}>{buttonText}</Text>
     </Pressable>
-    //  </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  // container: {
-  //   width: 100,
-  // },
   button: {
-    // marginRight: 24,
-    // marginLeft: 24,
     paddingVertical: 15,
     borderRadius: 12,
     elevation: 3,
-    backgroundColor: "#E41447",
+    backgroundColor: COLORS.primaryBtnColor,
   },
   text: {
+    fontFamily: "Manrope-Bold",
     fontSize: 16,
+    fontWeight: 700,
     textAlign: "center",
     lineHeight: 26,
     letterSpacing: 0.4,
-    color: "white",
+    color: COLORS.buttonTextColor,
   },
 });
