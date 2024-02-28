@@ -23,8 +23,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 54,
     borderWidth: 1,
-    // marginRight: 24,
-    // marginLeft: 24,
     borderRadius: 12,
     borderColor: "#334155",
   },

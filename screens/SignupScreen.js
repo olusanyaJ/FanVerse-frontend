@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, StyleSheet, View, Pressable, SafeAreaView } from "react-native";
-import navigation from "@react-navigation/native";
 
 export default SignupScreen = ({ navigation }) => {
   return (

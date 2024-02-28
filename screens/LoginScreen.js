@@ -12,8 +12,21 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
+import FONTS from "../utils/fonts";
+
+// import { useFonts } from "expo-font";
+// import AppLoading from "expo-app-loading";
 
 export default LoginScreen = ({ navigation }) => {
+  //   let [fontsLoaded] = useFonts({
+  //     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
+  //     "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
+  //     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
+  //   });
+
+  //   if (!fontsLoaded) {
+  //     return <AppLoading />;
+  //   }
   const [isPasswordShown, setIsPasswordShown] = useState(false);
 
   const onPressSignin = () => {
@@ -120,7 +133,13 @@ const styles = StyleSheet.create({
   textContainer: {
     // marginTop: 40,
   },
-  pageTitle: {},
+  pageTitle: {
+    // fontFamily: FONTS.bold,
+    // fontSize: 24,
+    // fontWeight: 700,
+    // lineHeight: 36,
+    // color: COLORS.primaryTextColor,
+  },
   pageSubtitle: {},
   inputContainer: {
     // marginBottom: 12,
