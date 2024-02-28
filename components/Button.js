@@ -11,21 +11,21 @@ export default Button = ({ buttonText, onPress }) => {
   const { width } = useWindowDimensions();
 
   return (
-    <SafeAreaView style={[styles.container, { width }]}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.text}>{buttonText}</Text>
-      </Pressable>
-    </SafeAreaView>
+    // <SafeAreaView style={[styles.container, { width }]}>
+    <Pressable style={styles.button} onPress={onPress}>
+      <Text style={styles.text}>{buttonText}</Text>
+    </Pressable>
+    //  </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: 100,
-  },
+  // container: {
+  //   width: 100,
+  // },
   button: {
-    marginRight: 24,
-    marginLeft: 24,
+    // marginRight: 24,
+    // marginLeft: 24,
     paddingVertical: 15,
     borderRadius: 12,
     elevation: 3,

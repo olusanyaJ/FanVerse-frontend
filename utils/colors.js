@@ -5,4 +5,5 @@ export default COLORS = {
   primaryBtnColor: "#E41447",
   buttonTextColor: "#FFFFFF",
   thirdTextColor: "#2D8FFF",
+  inputBgColor: "#1E293B",
 };

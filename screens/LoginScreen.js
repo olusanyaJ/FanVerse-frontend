@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -12,21 +12,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
-import FONTS from "../utils/fonts";
 
-// import { useFonts } from "expo-font";
-// import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
+
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default LoginScreen = ({ navigation }) => {
-  //   let [fontsLoaded] = useFonts({
-  //     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-  //     "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-  //     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  //   });
+  const [fontsLoaded] = useFonts({
+    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
+    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
+    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
+  });
 
-  //   if (!fontsLoaded) {
-  //     return <AppLoading />;
-  //   }
   const [isPasswordShown, setIsPasswordShown] = useState(false);
 
   const onPressSignin = () => {
@@ -40,8 +39,18 @@ export default LoginScreen = ({ navigation }) => {
     console.log("Apple Button Pressed");
   };
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Welcome Back!</Text>
@@ -51,7 +60,7 @@ export default LoginScreen = ({ navigation }) => {
           <View style={styles.inputField}>
             <TextInput
               placeholder="Email"
-              placeholderTextColor={"red"}
+              placeholderTextColor={COLORS.secondaryTextColor}
               keyboardType="email-address"
               style={styles.inputPlaceholder}
             />
@@ -62,7 +71,7 @@ export default LoginScreen = ({ navigation }) => {
           <View style={styles.inputField}>
             <TextInput
               placeholder="Password"
-              placeholderTextColor={"red"}
+              placeholderTextColor={COLORS.secondaryTextColor}
               secureTextEntry={isPasswordShown}
               style={styles.inputPlaceholder}
             />
@@ -80,9 +89,9 @@ export default LoginScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <View>
+        <View style={styles.fgtPwdContainer}>
           <Pressable>
-            <Text>Forgot Password?</Text>
+            <Text style={styles.fgtPwdText}>Forgot Password?</Text>
           </Pressable>
         </View>
 
@@ -128,33 +137,39 @@ const styles = StyleSheet.create({
   },
   pageContainer: {
     flex: 1,
-    // marginHorizontal: 24,
+    marginHorizontal: 24,
   },
   textContainer: {
-    // marginTop: 40,
+    marginVertical: 40,
   },
   pageTitle: {
-    // fontFamily: FONTS.bold,
-    // fontSize: 24,
-    // fontWeight: 700,
-    // lineHeight: 36,
+    fontFamily: "Manrope-Bold",
+    fontSize: 24,
+    fontWeight: 700,
+    lineHeight: 36,
     // color: COLORS.primaryTextColor,
   },
-  pageSubtitle: {},
+  pageSubtitle: {
+    fontFamily: "Manrope-Light",
+    fontSize: 14,
+    fontWeight: 400,
+    lineHeight: 23.8,
+    letterSpacing: 0.3,
+    // color: COLORS.secondaryTextColor,
+  },
   inputContainer: {
-    // marginBottom: 12,
-    borderColor: "red",
-    borderWidth: 1,
+    marginBottom: 16,
   },
   inputField: {
     width: "100%",
-    height: 34,
-    borderColor: "black",
+    height: 56,
+    borderColor: COLORS.inputBgColor,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
     paddingLeft: 24,
+    backgroundColor: COLORS.inputBgColor,
   },
   inputPlaceholder: {
     width: "100%",
@@ -164,9 +179,25 @@ const styles = StyleSheet.create({
     right: 12,
   },
   icon: {
-    // color: COLORS.primaryBtnColor,
+    color: COLORS.secondaryTextColor,
   },
+  fgtPwdContainer: {
+    marginTop: 24,
+    marginBottom: 80,
+    alignItems: "center",
+  },
+  fgtPwdText: {
+    fontFamily: "Manrope-Light",
+    fontSize: 14,
+    fontWeight: 600,
+    lineHeight: 24,
+    letterSpacing: 0.3,
+    color: COLORS.thirdTextColor,
+  },
+
   bottomDivide: {
+    marginVertical: 32,
+    marginHorizontal: 67,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -187,7 +218,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // marginVertical: 41,
+    marginTop: 102,
+    // marginBottom: 8,
   },
   signInText: {
     color: COLORS.appBackgroundColor,
