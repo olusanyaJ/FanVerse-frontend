@@ -40,14 +40,14 @@ export default GetStartedScreen = ({ navigation }) => {
         <View>
           <Button onPress={onPressEmail} buttonText={"Continue with Email"} />
         </View>
-        <View style={styles.button}>
+        <View style={styles.btnContainer}>
           <SignInWithBtn
             onPress={onPressGoogle}
             buttonText={"Continue with Google"}
             icon={require("../assets/icons/Google.png")}
           />
         </View>
-        <View>
+        <View style={styles.btnContainer}>
           <SignInWithBtn
             onPress={onPressApple}
             buttonText={"Continue with Apple"}
@@ -81,9 +81,12 @@ const styles = StyleSheet.create({
     height: 406,
     left: 36,
   },
-  button: {
+  btnContainer: {
     marginTop: 16,
-    marginBottom: 16,
+    flexDirection: "row",
+    height: 54,
+    paddingRight: 24,
+    paddingLeft: 24,
   },
   bodyContent: {
     flex: 1,

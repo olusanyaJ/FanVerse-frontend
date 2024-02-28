@@ -1,23 +1,12 @@
 import React from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  Image,
-  SafeAreaView,
-  useWindowDimensions,
-} from "react-native";
+import { Pressable, StyleSheet, Text, Image } from "react-native";
 
 export default SignInWithBtn = ({ buttonText, onPress, icon }) => {
-  const { width } = useWindowDimensions();
-
   return (
-    <SafeAreaView style={[styles.container, { width }]}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Image source={icon} style={styles.btnImage} resizeMode="contain" />
-        <Text style={styles.text}>{buttonText}</Text>
-      </Pressable>
-    </SafeAreaView>
+    <Pressable style={styles.button} onPress={onPress}>
+      <Image source={icon} style={styles.btnImage} resizeMode="contain" />
+      <Text style={styles.text}>{buttonText}</Text>
+    </Pressable>
   );
 };
 
@@ -34,8 +23,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 54,
     borderWidth: 1,
-    marginRight: 24,
-    marginLeft: 24,
+    // marginRight: 24,
+    // marginLeft: 24,
     borderRadius: 12,
     borderColor: "#334155",
   },
