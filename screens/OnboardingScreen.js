@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FlatList, StyleSheet, View, Animated } from "react-native";
+import { Image, FlatList, StyleSheet, View, Animated } from "react-native";
 import OnboardingItem from "../components/OnboardingItem";
 import onboardingSlides from "../utils/onboardingSlides";
 import OnboardingPaginator from "../components/OnboardingPaginator";
 import Button from "../components/Button";
 import SkipBtn from "../components/SkipBtn";
+import COLORS from "../utils/colors";
 
 export default OnboardingScreen = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,8 +49,10 @@ export default OnboardingScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SkipBtn onPressSkip={onPressSkip} />
-      <View style={{ flex: 3 }}>
+      <View style={styles.inner}>
+        <View style={styles.skipCtn}>
+          <SkipBtn onPressSkip={onPressSkip} />
+        </View>
         <FlatList
           data={onboardingSlides}
           renderItem={({ item }) => <OnboardingItem item={item} />}
@@ -68,8 +71,18 @@ export default OnboardingScreen = ({ navigation }) => {
           ref={onboardingSlidesRef}
         />
       </View>
-      <OnboardingPaginator data={onboardingSlides} scrollX={scrollX} />
-      <Button scrollTo={scrollTo} onPress={onPress} buttonText={buttonText} />
+      <View style={styles.btnCtn}>
+        <View>
+          <OnboardingPaginator data={onboardingSlides} scrollX={scrollX} />
+        </View>
+        <View style={styles.btn}>
+          <Button
+            scrollTo={scrollTo}
+            onPress={onPress}
+            buttonText={buttonText}
+          />
+        </View>
+      </View>
     </View>
   );
 };
@@ -77,7 +90,18 @@ export default OnboardingScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    backgroundColor: "#0F172A",
+    backgroundColor: COLORS.getStartedBgColor,
+  },
+  skipCtn: {
+    marginTop: 16,
+    marginBottom: 17,
+  },
+  btnCtn: {
+    paddingHorizontal: 24,
+    height: "100%",
+    backgroundColor: COLORS.appBackgroundColor,
+  },
+  btn: {
+    marginTop: 84,
   },
 });

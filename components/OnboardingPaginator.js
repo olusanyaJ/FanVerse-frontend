@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, Animated, useWindowDimensions, View } from "react-native";
+import COLORS from "../utils/colors";
 
 export default OnboardingPaginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
 
   return (
-    <View style={{ flexDirection: "row", marginLeft: 24 }}>
+    <View style={{ flexDirection: "row" }}>
       {data.map((_, i) => {
         const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
 
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   dot: {
     height: 6,
     borderRadius: 500,
-    backgroundColor: "#2D8FFF",
-    marginHorizontal: 4,
+    backgroundColor: COLORS.thirdTextColor,
+    marginRight: 6,
   },
 });

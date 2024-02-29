@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
+import colors from "../utils/colors";
 
 export default SkipButton = ({ onPressSkip }) => {
   return (
@@ -15,20 +16,19 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-start",
     alignSelf: "flex-end",
+    marginRight: 24,
   },
   button: {
-    marginRight: 24,
-    marginTop: 16,
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#2D8FFF",
+    borderColor: COLORS.thirdTextColor,
     gap: 8,
   },
   text: {
     fontSize: 12,
-    color: "#2D8FFF",
+    color: COLORS.thirdTextColor,
     lineHeight: 20,
     letterSpacing: 0.25,
     fontWeight: 700,
