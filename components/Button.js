@@ -34,6 +34,7 @@ export default Button = ({ buttonText, onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
+    width: "100%",
     paddingVertical: 15,
     borderRadius: 12,
     elevation: 3,
