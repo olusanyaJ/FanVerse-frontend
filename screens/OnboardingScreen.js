@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Image, FlatList, StyleSheet, View, Animated } from "react-native";
+import {
+  ImageBackground,
+  FlatList,
+  StyleSheet,
+  View,
+  Animated,
+} from "react-native";
 import OnboardingItem from "../components/OnboardingItem";
 import onboardingSlides from "../utils/onboardingSlides";
 import OnboardingPaginator from "../components/OnboardingPaginator";
 import Button from "../components/Button";
 import SkipBtn from "../components/SkipBtn";
-import COLORS from "../utils/colors";
 
 export default OnboardingScreen = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,7 +53,11 @@ export default OnboardingScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      style={styles.container}
+      source={require("../assets/imgs/Untitled.png")}
+      resizeMode="cover"
+    >
       <View style={styles.inner}>
         <View style={styles.skipCtn}>
           <SkipBtn onPressSkip={onPressSkip} />
@@ -83,23 +92,21 @@ export default OnboardingScreen = ({ navigation }) => {
           />
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.getStartedBgColor,
   },
   skipCtn: {
     marginTop: 16,
-    marginBottom: 17,
+    marginBottom: 46,
   },
   btnCtn: {
+    flex: 1,
     paddingHorizontal: 24,
-    height: "100%",
-    backgroundColor: COLORS.appBackgroundColor,
   },
   btn: {
     marginTop: 84,

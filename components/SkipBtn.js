@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
-import colors from "../utils/colors";
+import COLORS from "../utils/colors";
+
+import { useFonts } from "expo-font";
+
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default SkipButton = ({ onPressSkip }) => {
+  const [fontsLoaded] = useFonts({
+    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <Pressable style={styles.button} onPress={onPressSkip}>
         <Text style={styles.text}>Skip</Text>
       </Pressable>
@@ -27,6 +47,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   text: {
+    fontFamily: "Manrope-Light",
     fontSize: 12,
     color: COLORS.thirdTextColor,
     lineHeight: 20,

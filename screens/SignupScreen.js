@@ -3,14 +3,15 @@ import { Text, StyleSheet, View, Pressable, SafeAreaView } from "react-native";
 
 export default SignupScreen = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Text> Sign up Scrren </Text>
       <Pressable onPress={() => navigation.navigate("LoginScreen")}>
         <Text
           style={{
-            borderWidth: 1,
-            borderRadius: 12,
-            borderColor: "#334155",
+            padding: 16,
+            marginTop: 16,
+            backgroundColor: "red",
+            color: "white",
           }}
         >
           back to login screen
@@ -20,4 +21,10 @@ export default SignupScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
