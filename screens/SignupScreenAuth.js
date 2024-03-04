@@ -23,7 +23,7 @@ export default SignupScreenAuth = ({ navigation }) => {
 
   const onPress = () => {
     // onChangeText();
-    navigation.navigate("GetStartedScreen");
+    navigation.navigate("PreferenceScreen");
   };
 
   const onPressResend = () => {
