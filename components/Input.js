@@ -6,7 +6,6 @@ export default Input = ({
   placeholder,
   keyboardType,
   secureTextEntry,
-  // onChangeText,
   maxLength,
 }) => {
   return (
@@ -17,7 +16,6 @@ export default Input = ({
         keyboardType={keyboardType}
         style={styles.inputPlaceholder}
         secureTextEntry={secureTextEntry}
-        // onChangeText={onChangeText}
         maxLength={maxLength}
       />
     </View>

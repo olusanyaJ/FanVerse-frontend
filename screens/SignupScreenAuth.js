@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback } from "react";
 import { Text, StyleSheet, View, Image, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
@@ -18,11 +18,7 @@ export default SignupScreenAuth = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  //   const [authCode, setAuthCode] = useState(Array(5).fill(""));
-  //   const inputRefs = useRef([]);
-
   const onPress = () => {
-    // onChangeText();
     navigation.navigate("PreferenceScreen");
   };
 
@@ -35,7 +31,6 @@ export default SignupScreenAuth = ({ navigation }) => {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return null;
   }
@@ -65,8 +60,6 @@ export default SignupScreenAuth = ({ navigation }) => {
                 placeholder={" "}
                 keyboardType={"number-pad"}
                 secureTextEntry={true}
-                // onChangeText={onChangeText}
-                // onChangeText={(text) => onChangeText(text, index)}
                 maxLength={1}
               />
             </View>
