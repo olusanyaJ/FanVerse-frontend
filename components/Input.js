@@ -2,7 +2,12 @@ import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import COLORS from "../utils/colors";
 
-export default Input = ({ placeholder, keyboardType }) => {
+export default Input = ({
+  placeholder,
+  keyboardType,
+  secureTextEntry,
+  maxLength,
+}) => {
   return (
     <View style={styles.inputField}>
       <TextInput
@@ -10,6 +15,8 @@ export default Input = ({ placeholder, keyboardType }) => {
         placeholderTextColor={COLORS.secondaryTextColor}
         keyboardType={keyboardType}
         style={styles.inputPlaceholder}
+        secureTextEntry={secureTextEntry}
+        maxLength={maxLength}
       />
     </View>
   );
