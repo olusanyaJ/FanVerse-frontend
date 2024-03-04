@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   signInText: {
     color: COLORS.secondaryTextColor,
-    fontFamily: "Manrope-Regular",
+    fontFamily: "Manrope-Light",
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,

@@ -8,7 +8,7 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-export default Button = ({ buttonText, onPress }) => {
+export default BtnOutline = ({ buttonText, onPress }) => {
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
   });
@@ -35,12 +35,13 @@ export default Button = ({ buttonText, onPress }) => {
 const styles = StyleSheet.create({
   button: {
     width: "100%",
-    paddingVertical: 15,
     borderRadius: 12,
     elevation: 3,
-    backgroundColor: COLORS.primaryBtnColor,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: COLORS.primaryBtnColor,
+    borderColor: COLORS.thirdTextColor,
+    gap: 8,
   },
   text: {
     fontFamily: "Manrope-Bold",
