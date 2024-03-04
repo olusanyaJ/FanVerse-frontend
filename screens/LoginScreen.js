@@ -1,20 +1,14 @@
-import React, { useCallback, useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  TextInput,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import React, { useCallback } from "react";
+import { Text, StyleSheet, View, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
 import { useFonts } from "expo-font";
 
 import * as SplashScreen from "expo-splash-screen";
+import Input from "../components/Input";
+import InputPassword from "../components/InputPassword";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,17 +19,15 @@ export default LoginScreen = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const [isPasswordShown, setIsPasswordShown] = useState(true);
-
   const onPressSignin = () => {
-    console.log("Signin Button Pressed");
+    navigation.navigate("GetStartedScreen");
   };
 
   const onPressGoogle = () => {
-    console.log("Google Button Pressed");
+    navigation.navigate("GetStartedScreen");
   };
   const onPressApple = () => {
-    console.log("Apple Button Pressed");
+    navigation.navigate("GetStartedScreen");
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -56,40 +48,15 @@ export default LoginScreen = ({ navigation }) => {
           <Text style={styles.pageSubtitle}>Sign into your account!</Text>
         </View>
         <View style={styles.inputContainer}>
-          <View style={styles.inputField}>
-            <TextInput
-              placeholder="Email"
-              placeholderTextColor={COLORS.secondaryTextColor}
-              keyboardType="email-address"
-              style={styles.inputPlaceholder}
-            />
-          </View>
+          <Input placeholder={"Email"} keyboardType={"email-address"} />
         </View>
 
         <View style={styles.inputContainer}>
-          <View style={styles.inputField}>
-            <TextInput
-              placeholder="Password"
-              placeholderTextColor={COLORS.secondaryTextColor}
-              secureTextEntry={isPasswordShown}
-              style={styles.inputPlaceholder}
-            />
-
-            <TouchableOpacity
-              onPress={() => setIsPasswordShown(!isPasswordShown)}
-              style={styles.passwordIcon}
-            >
-              {isPasswordShown == true ? (
-                <Ionicons name="eye-off" size={24} style={styles.icon} />
-              ) : (
-                <Ionicons name="eye" size={24} style={styles.icon} />
-              )}
-            </TouchableOpacity>
-          </View>
+          <InputPassword />
         </View>
 
         <View style={styles.fgtPwdContainer}>
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
             <Text style={styles.fgtPwdText}>Forgot Password?</Text>
           </Pressable>
         </View>
@@ -142,15 +109,15 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     fontFamily: "Manrope-Bold",
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 700,
     lineHeight: 36,
     color: COLORS.primaryTextColor,
     paddingBottom: 8,
   },
   pageSubtitle: {
-    fontFamily: "Manrope-Light",
-    fontSize: 14,
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
     fontWeight: 400,
     lineHeight: 23.8,
     letterSpacing: 0.3,
@@ -159,31 +126,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: 16,
   },
-  inputField: {
-    width: "100%",
-    height: 56,
-    borderColor: COLORS.inputBgColor,
-    borderWidth: 1,
-    borderRadius: 12,
-    justifyContent: "center",
-    paddingHorizontal: 16,
-    backgroundColor: COLORS.inputBgColor,
-  },
-  inputPlaceholder: {
-    width: "100%",
-    fontFamily: "Manrope-Light",
-    fontSize: 16,
-    fontWeight: 400,
-    lineHeight: 26,
-    letterSpacing: 0.4,
-  },
-  passwordIcon: {
-    position: "absolute",
-    right: 16,
-  },
-  icon: {
-    color: COLORS.secondaryTextColor,
-  },
   fgtPwdContainer: {
     marginTop: 24,
     marginBottom: 80,
@@ -191,7 +133,7 @@ const styles = StyleSheet.create({
   },
   fgtPwdText: {
     fontFamily: "Manrope-Bold",
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 600,
     lineHeight: 24,
     letterSpacing: 0.3,
@@ -211,7 +153,7 @@ const styles = StyleSheet.create({
   },
   lineBreakText: {
     fontFamily: "Manrope-Regular",
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.2,
@@ -235,7 +177,7 @@ const styles = StyleSheet.create({
   signInText: {
     fontFamily: "Manrope-Bold",
     color: COLORS.secondaryTextColor,
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
     fontWeight: 400,
@@ -243,7 +185,7 @@ const styles = StyleSheet.create({
   signInLink: {
     fontFamily: "Manrope-Bold",
     fontWeight: 700,
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
     color: COLORS.thirdTextColor,

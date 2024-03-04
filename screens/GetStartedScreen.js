@@ -24,14 +24,14 @@ export default GetStartedScreen = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
   const onPressEmail = () => {
-    console.log("Email Button Pressed");
+    navigation.navigate("LoginScreen");
   };
 
   const onPressGoogle = () => {
-    console.log("Google Button Pressed");
+    navigation.navigate("LoginScreen");
   };
   const onPressApple = () => {
-    console.log("Apple Button Pressed");
+    navigation.navigate("LoginScreen");
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -45,7 +45,7 @@ export default GetStartedScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.imageContainer}>
         <Image
           source={require("../assets/imgs/getStartedToggleBgImg.png")}
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   title: {
     color: COLORS.primaryTextColor,
     fontFamily: "Manrope-Bold",
-    fontSize: 24,
+    fontSize: 28,
     lineHeight: 36,
     letterSpacing: 0,
     fontWeight: 700,
@@ -185,14 +185,16 @@ const styles = StyleSheet.create({
   signInText: {
     color: COLORS.secondaryTextColor,
     fontFamily: "Manrope-Regular",
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
     fontWeight: 400,
-    textAlign: "center",
   },
   signInLink: {
     fontFamily: "Manrope-Bold",
+    fontSize: 16,
+    lineHeight: 24,
+    letterSpacing: 0.3,
     fontWeight: 700,
     color: COLORS.thirdTextColor,
   },
