@@ -1,25 +1,28 @@
 import React, { useCallback } from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, StyleSheet, View, SafeAreaView } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
+import BtnOutline from "../components/BtnOutline";
+import Input from "../components/Input";
 
 import { useFonts } from "expo-font";
 
 import * as SplashScreen from "expo-splash-screen";
-import Input from "../components/Input";
 
 SplashScreen.preventAutoHideAsync();
 
-export default ForgotPassword = ({ navigation }) => {
+export default ForgotPasswordVerificationScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const onPressSignin = () => {
-    navigation.navigate("ForgotPasswordVerificationScreen");
+  const onPress = () => {
+    navigation.navigate("NewPasswordScreen");
+  };
+
+  const onPressResend = () => {
+    navigation.navigate("SignupScreenFill");
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -27,7 +30,6 @@ export default ForgotPassword = ({ navigation }) => {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return null;
   }
@@ -36,17 +38,31 @@ export default ForgotPassword = ({ navigation }) => {
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.pageTitle}>Forgot Password?</Text>
+          <Text style={styles.pageTitle}>Enter Authentication code</Text>
           <Text style={styles.pageSubtitle}>
-            Enter your email address linked to your FanVerse account.
+            Please enter the verification code sent to your email and phone
+            number.
           </Text>
         </View>
+
         <View style={styles.inputContainer}>
-          <Input placeholder={"Email"} keyboardType={"email-address"} />
+          {[...Array(5)].map((_, index) => (
+            <View style={styles.inputField} key={index}>
+              <Input
+                placeholder={" "}
+                keyboardType={"number-pad"}
+                secureTextEntry={true}
+                maxLength={1}
+              />
+            </View>
+          ))}
         </View>
 
-        <View style={styles.btnContainer}>
-          <Button onPress={onPressSignin} buttonText={"Sign in"} />
+        <View style={styles.signinContainer}>
+          <Button onPress={onPress} buttonText={"Confirm"} />
+          <View style={styles.resendContainer}>
+            <BtnOutline onPress={onPressResend} buttonText={"Resend code"} />
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -62,8 +78,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 24,
   },
+  image: {
+    width: 24,
+    height: 24,
+  },
   textContainer: {
-    marginVertical: 40,
+    marginVertical: 24,
   },
   pageTitle: {
     fontFamily: "Manrope-Bold",
@@ -82,9 +102,17 @@ const styles = StyleSheet.create({
     color: COLORS.secondaryTextColor,
   },
   inputContainer: {
-    marginBottom: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  btnContainer: {
-    marginTop: 80,
+  inputField: {
+    flexDirection: "row",
+    width: "16%",
+  },
+  signinContainer: {
+    marginTop: 81,
+  },
+  resendContainer: {
+    marginTop: 16,
   },
 });
