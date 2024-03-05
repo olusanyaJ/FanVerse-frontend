@@ -7,6 +7,9 @@ import SignupScreen from "../screens/SignupScreen";
 import ForgotPassword from "../screens/ForgotPassword";
 import SignupScreenFill from "../screens/SignupScreenFill";
 import SignupScreenAuth from "../screens/SignupScreenAuth";
+import ForgotPasswordVerificationScreen from "../screens/ForgotPasswordVerificationScreen";
+import NewPasswordScreen from "../screens/NewPasswordScreen";
+import ConfirmPasswordScreen from "../screens/ConfirmPasswordScreen";
 import PreferenceScreen from "../screens/PreferenceScreen";
 
 const Stack = createNativeStackNavigator();
@@ -54,6 +57,24 @@ export default appNaviagtion = () => {
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ForgotPasswordVerificationScreen"
+          component={ForgotPasswordVerificationScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="NewPasswordScreen"
+          component={NewPasswordScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ConfirmPasswordScreen"
+          component={ConfirmPasswordScreen}
           options={{ headerShown: false }}
         />
 

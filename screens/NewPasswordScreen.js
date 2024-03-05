@@ -1,25 +1,23 @@
 import React, { useCallback } from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, StyleSheet, View, SafeAreaView } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
 import { useFonts } from "expo-font";
 
 import * as SplashScreen from "expo-splash-screen";
-import Input from "../components/Input";
+import InputPassword from "../components/InputPassword";
 
 SplashScreen.preventAutoHideAsync();
 
-export default ForgotPassword = ({ navigation }) => {
+export default NewPasswordScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
   const onPressSignin = () => {
-    navigation.navigate("ForgotPasswordVerificationScreen");
+    navigation.navigate("ConfirmPasswordScreen");
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -36,17 +34,18 @@ export default ForgotPassword = ({ navigation }) => {
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.pageTitle}>Forgot Password?</Text>
+          <Text style={styles.pageTitle}>Enter a New Password</Text>
           <Text style={styles.pageSubtitle}>
-            Enter your email address linked to your FanVerse account.
+            Please enter a new password for your account.
           </Text>
         </View>
+
         <View style={styles.inputContainer}>
-          <Input placeholder={"Email"} keyboardType={"email-address"} />
+          <InputPassword />
         </View>
 
-        <View style={styles.btnContainer}>
-          <Button onPress={onPressSignin} buttonText={"Sign in"} />
+        <View>
+          <Button onPress={onPressSignin} buttonText={"Contine"} />
         </View>
       </View>
     </SafeAreaView>
@@ -82,9 +81,6 @@ const styles = StyleSheet.create({
     color: COLORS.secondaryTextColor,
   },
   inputContainer: {
-    marginBottom: 16,
-  },
-  btnContainer: {
-    marginTop: 80,
+    marginBottom: 80,
   },
 });
