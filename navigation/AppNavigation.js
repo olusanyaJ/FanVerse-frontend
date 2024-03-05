@@ -11,6 +11,7 @@ import ForgotPasswordVerificationScreen from "../screens/ForgotPasswordVerificat
 import NewPasswordScreen from "../screens/NewPasswordScreen";
 import ConfirmPasswordScreen from "../screens/ConfirmPasswordScreen";
 import PreferenceScreen from "../screens/PreferenceScreen";
+import Dashboard from "../screens/Dashboard";
 
 const Stack = createNativeStackNavigator();
 
@@ -81,6 +82,12 @@ export default appNaviagtion = () => {
         <Stack.Screen
           name="PreferenceScreen"
           component={PreferenceScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
