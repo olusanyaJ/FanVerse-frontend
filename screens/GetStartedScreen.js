@@ -86,9 +86,9 @@ export default GetStartedScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.bottomContent}>
-          <Text style={styles.signInText}>Already have an account? </Text>
-          <Pressable onPress={() => navigation.navigate("LoginScreen")}>
-            <Text style={styles.signInLink}> Sign In</Text>
+          <Text style={styles.signUpText}>Don't have an account? </Text>
+          <Pressable onPress={() => navigation.navigate("SignupScreen")}>
+            <Text style={styles.signUpLink}> Sign Up</Text>
           </Pressable>
         </View>
       </View>
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 41,
   },
-  signInText: {
+  signUpText: {
     color: COLORS.secondaryTextColor,
     fontFamily: "Manrope-Light",
     fontSize: 16,
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     fontWeight: 400,
   },
-  signInLink: {
+  signUpLink: {
     fontFamily: "Manrope-Bold",
     fontSize: 16,
     lineHeight: 24,

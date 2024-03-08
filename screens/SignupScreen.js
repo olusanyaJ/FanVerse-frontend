@@ -73,11 +73,11 @@ export default SignupScreen = ({ navigation }) => {
             <Text style={styles.termsText}>
               By signing up, you agree to the
             </Text>
-            <Pressable onPress={() => navigation.navigate("LoginScreen")}>
+            <Pressable onPress={() => navigation.navigate("PlaceholderScreen")}>
               <Text style={styles.termsLink}> User Agreement </Text>
             </Pressable>
             <Text style={styles.termsText}>and</Text>
-            <Pressable onPress={() => navigation.navigate("LoginScreen")}>
+            <Pressable onPress={() => navigation.navigate("PlaceholderScreen")}>
               <Text style={styles.termsLink}> Privacy Policy.</Text>
             </Pressable>
           </View>

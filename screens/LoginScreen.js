@@ -20,7 +20,7 @@ export default LoginScreen = ({ navigation }) => {
   });
 
   const onPressSignin = () => {
-    navigation.navigate("GetStartedScreen");
+    navigation.navigate("Dashboard");
   };
 
   const onPressGoogle = () => {
