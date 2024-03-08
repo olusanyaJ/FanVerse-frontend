@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Manrope-Bold",
     fontSize: 16,
-    fontWeight: 700,
+    // fontWeight: 700,
     textAlign: "center",
     lineHeight: 26,
     letterSpacing: 0.4,

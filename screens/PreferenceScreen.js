@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   toggleText: {
     fontFamily: "Manrope-Bold",
     fontSize: 18,
-    fontWeight: 700,
+    // fontWeight: 700,
     lineHeight: 26,
     letterSpacing: 0.45,
     color: COLORS.primaryTextColor,
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontFamily: "Manrope-Bold",
     fontSize: 28,
-    fontWeight: 700,
+    // fontWeight: 700,
     lineHeight: 36,
     color: COLORS.primaryTextColor,
     paddingBottom: 8,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   pageSubtitle: {
     fontFamily: "Manrope-Regular",
     fontSize: 16,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 23.8,
     letterSpacing: 0.3,
     color: COLORS.secondaryTextColor,

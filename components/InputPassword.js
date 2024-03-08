@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontFamily: "Manrope-Regular",
     fontSize: 16,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 26,
     letterSpacing: 0.4,
     color: COLORS.primaryTextColor,
