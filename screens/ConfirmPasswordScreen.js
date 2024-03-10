@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   textContainer: {
     marginVertical: 40,
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
   },
   statusMessage: {
     fontFamily: "Manrope-Bold",
-    fontSize: 16,
+    fontSize: 14,
     // fontWeight: 700,
     lineHeight: 18,
     letterSpacing: 0,

@@ -43,11 +43,13 @@ export default SignupScreen = ({ navigation }) => {
     <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
-          <Image
-            source={require("../assets/icons/x.png")}
-            style={styles.image}
-            resizeMode="contain"
-          />
+          <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
+            <Image
+              source={require("../assets/icons/x.png")}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </Pressable>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Create an account</Text>
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   signinContainer: {
-    marginTop: 40,
+    marginTop: 24,
     marginBottom: 24,
   },
   signinTerms: {
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bottomDivide: {
-    marginBottom: 24,
+    marginBottom: 20,
     marginHorizontal: 67,
     flexDirection: "row",
     alignItems: "center",
@@ -194,7 +196,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 38,
+    marginTop: 36,
   },
   signInText: {
     fontFamily: "Manrope-Light",

@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   image: {
     width: 24,

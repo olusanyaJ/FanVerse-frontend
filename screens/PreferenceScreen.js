@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   toggleSection: {
     marginBottom: 280,
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     position: "absolute",
-    bottom: 0,
+    bottom: 46,
     left: 0,
     right: 0,
   },

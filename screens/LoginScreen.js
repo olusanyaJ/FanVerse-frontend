@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   textContainer: {
     marginVertical: 40,
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 102,
+    marginTop: 52,
   },
   signInText: {
     fontFamily: "Manrope-Light",

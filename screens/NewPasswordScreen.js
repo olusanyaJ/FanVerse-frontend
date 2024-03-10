@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   textContainer: {
     marginVertical: 40,
