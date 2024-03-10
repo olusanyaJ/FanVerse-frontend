@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
@@ -41,7 +40,7 @@ export default LoginScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Welcome Back!</Text>
@@ -91,7 +90,7 @@ export default LoginScreen = ({ navigation }) => {
           </Pressable>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

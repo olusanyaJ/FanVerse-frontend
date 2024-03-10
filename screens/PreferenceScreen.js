@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Switch,
-  ScrollView,
-} from "react-native";
+import { Text, StyleSheet, View, Switch, ScrollView } from "react-native";
 import Button from "../components/Button";
 import TabBtn from "../components/TabBtn";
 
@@ -85,7 +78,7 @@ export default PreferenceScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Select your sport</Text>
@@ -151,7 +144,7 @@ export default PreferenceScreen = ({ navigation }) => {
           <Button onPress={onPress} buttonText={"Finish"} />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

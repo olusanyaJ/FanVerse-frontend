@@ -35,6 +35,7 @@ export default Button = ({ buttonText, onPress }) => {
 const styles = StyleSheet.create({
   button: {
     width: "100%",
+    height: 54,
     justifyContent: "center",
     borderRadius: 12,
     backgroundColor: COLORS.primaryBtnColor,

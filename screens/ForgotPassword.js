@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Text, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
@@ -33,7 +32,7 @@ export default ForgotPassword = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Forgot Password?</Text>
@@ -49,7 +48,7 @@ export default ForgotPassword = ({ navigation }) => {
           <Button onPress={onPressSignin} buttonText={"Sign in"} />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

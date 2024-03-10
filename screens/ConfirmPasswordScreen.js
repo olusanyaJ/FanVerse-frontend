@@ -1,12 +1,5 @@
 import React, { useCallback, useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Modal,
-  Pressable,
-} from "react-native";
+import { Text, StyleSheet, View, Modal, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
@@ -44,7 +37,7 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Confirm New Password</Text>
@@ -78,7 +71,7 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
           </Modal>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

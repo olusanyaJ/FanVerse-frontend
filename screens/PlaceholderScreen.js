@@ -1,9 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
+import { Text, StyleSheet, Pressable, View } from "react-native";
 
 export default PlaceholderScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text
         style={{
           padding: 16,
@@ -27,7 +27,7 @@ export default PlaceholderScreen = ({ navigation }) => {
           back to Get started
         </Text>
       </Pressable>
-    </SafeAreaView>
+    </View>
   );
 };
 

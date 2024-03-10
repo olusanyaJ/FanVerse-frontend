@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Text, StyleSheet, View, Image, TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 import BtnOutline from "../components/BtnOutline";
@@ -36,7 +35,7 @@ export default SignupScreenAuth = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
           <Image
@@ -73,7 +72,7 @@ export default SignupScreenAuth = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -1,11 +1,21 @@
 import React from "react";
-import { Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
+import { Text, StyleSheet, Pressable, View } from "react-native";
 
 export default UserDashboard = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text> PreferenceScreen </Text>
-      <Pressable onPress={() => navigation.navigate("LoginScreen")}>
+    <View style={styles.container}>
+      <Text
+        style={{
+          padding: 16,
+          marginTop: 16,
+          fontSize: 36,
+          color: "#0F172A",
+          textAlign: "center",
+        }}
+      >
+        This UserDashboard screen is under construction{" "}
+      </Text>
+      <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
         <Text
           style={{
             padding: 16,
@@ -14,10 +24,10 @@ export default UserDashboard = ({ navigation }) => {
             color: "white",
           }}
         >
-          back to login screen
+          back to Get started
         </Text>
       </Pressable>
-    </SafeAreaView>
+    </View>
   );
 };
 

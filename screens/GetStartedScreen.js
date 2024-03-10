@@ -1,12 +1,5 @@
 import React, { useCallback, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Button from "../components/Button";
 import SignInWithBtn from "../components/SignInWithBtn";
 import COLORS from "../utils/colors";
@@ -139,7 +132,6 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     flexDirection: "row",
-    height: 54,
     paddingRight: 24,
     paddingLeft: 24,
   },
