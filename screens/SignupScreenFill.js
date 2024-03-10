@@ -6,8 +6,8 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Pressable,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 import usFlag from "../assets/icons/us-flag.png";
@@ -41,14 +41,16 @@ export default SignupScreenFill = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
-          <Image
-            source={require("../assets/icons/x.png")}
-            style={styles.image}
-            resizeMode="contain"
-          />
+          <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
+            <Image
+              source={require("../assets/icons/x.png")}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </Pressable>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Almost done!</Text>
@@ -83,7 +85,7 @@ export default SignupScreenFill = ({ navigation }) => {
           <Button onPress={onPress} buttonText={"Get code"} />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   pageHeader: {
     paddingVertical: 16,
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontFamily: "Manrope-Bold",
     fontSize: 28,
-    fontWeight: 700,
+    // fontWeight: 700,
     lineHeight: 36,
     color: COLORS.primaryTextColor,
     paddingBottom: 8,
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
   pageSubtitle: {
     fontFamily: "Manrope-Regular",
     fontSize: 16,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 23.8,
     letterSpacing: 0.3,
     color: COLORS.secondaryTextColor,
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontFamily: "Manrope-Regular",
     fontSize: 16,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 26,
     letterSpacing: 0.4,
     color: COLORS.primaryTextColor,
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontFamily: "Manrope-Bold",
     fontSize: 16,
-    fontWeight: 700,
+    // fontWeight: 700,
     lineHeight: 26,
     letterSpacing: 0.4,
     color: COLORS.primaryTextColor,

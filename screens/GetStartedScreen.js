@@ -1,12 +1,5 @@
 import React, { useCallback, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Button from "../components/Button";
 import SignInWithBtn from "../components/SignInWithBtn";
 import COLORS from "../utils/colors";
@@ -86,9 +79,9 @@ export default GetStartedScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.bottomContent}>
-          <Text style={styles.signInText}>Already have an account? </Text>
-          <Pressable onPress={() => navigation.navigate("LoginScreen")}>
-            <Text style={styles.signInLink}> Sign In</Text>
+          <Text style={styles.signUpText}>Don't have an account? </Text>
+          <Pressable onPress={() => navigation.navigate("SignupScreen")}>
+            <Text style={styles.signUpLink}> Sign Up</Text>
           </Pressable>
         </View>
       </View>
@@ -108,7 +101,8 @@ const styles = StyleSheet.create({
     width: 375,
     height: 335,
     top: 63.01,
-    left: 31.73,
+    // left: 31.73,
+    left: 34,
     borderRadius: 20,
     position: "relative",
   },
@@ -138,7 +132,6 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     flexDirection: "row",
-    height: 54,
     paddingRight: 24,
     paddingLeft: 24,
   },
@@ -163,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     lineHeight: 36,
     letterSpacing: 0,
-    fontWeight: 700,
+    // fontWeight: 700,
     textAlign: "center",
     paddingBottom: 4,
   },
@@ -173,8 +166,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 27,
     letterSpacing: 0.3,
-    fontWeight: 400,
-    textAlign: "center",
+    // fontWeight: 400,
   },
   bottomContent: {
     flexDirection: "row",
@@ -182,20 +174,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 41,
   },
-  signInText: {
+  signUpText: {
     color: COLORS.secondaryTextColor,
     fontFamily: "Manrope-Light",
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
-    fontWeight: 400,
+    // fontWeight: 400,
   },
-  signInLink: {
+  signUpLink: {
     fontFamily: "Manrope-Bold",
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
-    fontWeight: 700,
+    // fontWeight: 700,
     color: COLORS.thirdTextColor,
   },
 });

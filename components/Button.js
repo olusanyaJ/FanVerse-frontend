@@ -35,9 +35,9 @@ export default Button = ({ buttonText, onPress }) => {
 const styles = StyleSheet.create({
   button: {
     width: "100%",
-    paddingVertical: 15,
+    height: 54,
+    justifyContent: "center",
     borderRadius: 12,
-    elevation: 3,
     backgroundColor: COLORS.primaryBtnColor,
     borderWidth: 1,
     borderColor: COLORS.primaryBtnColor,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Manrope-Bold",
     fontSize: 16,
-    fontWeight: 700,
+    // fontWeight: 700,
     textAlign: "center",
     lineHeight: 26,
     letterSpacing: 0.4,

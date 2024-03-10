@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Text, StyleSheet, View, Pressable, Image } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
@@ -41,14 +40,16 @@ export default SignupScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
-          <Image
-            source={require("../assets/icons/x.png")}
-            style={styles.image}
-            resizeMode="contain"
-          />
+          <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
+            <Image
+              source={require("../assets/icons/x.png")}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </Pressable>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Create an account</Text>
@@ -73,11 +74,11 @@ export default SignupScreen = ({ navigation }) => {
             <Text style={styles.termsText}>
               By signing up, you agree to the
             </Text>
-            <Pressable onPress={() => navigation.navigate("LoginScreen")}>
+            <Pressable onPress={() => navigation.navigate("PlaceholderScreen")}>
               <Text style={styles.termsLink}> User Agreement </Text>
             </Pressable>
             <Text style={styles.termsText}>and</Text>
-            <Pressable onPress={() => navigation.navigate("LoginScreen")}>
+            <Pressable onPress={() => navigation.navigate("PlaceholderScreen")}>
               <Text style={styles.termsLink}> Privacy Policy.</Text>
             </Pressable>
           </View>
@@ -109,7 +110,7 @@ export default SignupScreen = ({ navigation }) => {
           </Pressable>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   pageHeader: {
     paddingVertical: 16,
@@ -130,12 +132,13 @@ const styles = StyleSheet.create({
     height: 24,
   },
   textContainer: {
-    marginVertical: 24,
+    marginTop: 8,
+    marginBottom: 24,
   },
   pageTitle: {
     fontFamily: "Manrope-Bold",
     fontSize: 28,
-    fontWeight: 700,
+    // fontWeight: 700,
     lineHeight: 36,
     color: COLORS.primaryTextColor,
     paddingBottom: 8,
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
   pageSubtitle: {
     fontFamily: "Manrope-Regular",
     fontSize: 16,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 23.8,
     letterSpacing: 0.3,
     color: COLORS.secondaryTextColor,
@@ -152,7 +155,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   signinContainer: {
-    marginTop: 40,
+    marginTop: 24,
     marginBottom: 24,
   },
   signinTerms: {
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bottomDivide: {
-    marginBottom: 24,
+    marginBottom: 20,
     marginHorizontal: 67,
     flexDirection: "row",
     alignItems: "center",
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
   lineBreakText: {
     fontFamily: "Manrope-Regular",
     fontSize: 14,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.2,
     paddingHorizontal: 12,
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 38,
+    marginTop: 36,
   },
   signInText: {
     fontFamily: "Manrope-Light",
@@ -201,11 +204,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
-    fontWeight: 400,
+    // fontWeight: 400,
   },
   signInLink: {
     fontFamily: "Manrope-Bold",
-    fontWeight: 700,
+    // fontWeight: 700,
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
@@ -217,11 +220,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 24,
     letterSpacing: 0.3,
-    fontWeight: 400,
+    // fontWeight: 400,
   },
   termsLink: {
     fontFamily: "Manrope-Bold",
-    fontWeight: 700,
+    // fontWeight: 700,
     fontSize: 14,
     lineHeight: 24,
     letterSpacing: 0.3,

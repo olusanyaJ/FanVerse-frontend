@@ -8,4 +8,7 @@ export default COLORS = {
   inputBgColor: "#1E293B",
   lineBreakColor: "#334155",
   getStartedBgColor: "#263143",
+  modalTextColor: "#039855",
+  modalBgColor: "#ECFDF3",
+  modalMessageTextColor: "#027A48",
 };

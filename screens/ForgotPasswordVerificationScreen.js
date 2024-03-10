@@ -1,12 +1,5 @@
 import React, { useCallback } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  TextInput,
-  Pressable,
-} from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 import BtnOutline from "../components/BtnOutline";
@@ -18,14 +11,14 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-export default SignupScreenAuth = ({ navigation }) => {
+export default ForgotPasswordVerificationScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
   const onPress = () => {
-    navigation.navigate("PreferenceScreen");
+    navigation.navigate("NewPasswordScreen");
   };
 
   const onPressResend = () => {
@@ -44,20 +37,11 @@ export default SignupScreenAuth = ({ navigation }) => {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
-        <View style={styles.pageHeader}>
-          <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
-            <Image
-              source={require("../assets/icons/x.png")}
-              style={styles.image}
-              resizeMode="contain"
-            />
-          </Pressable>
-        </View>
         <View style={styles.textContainer}>
-          <Text style={styles.pageTitle}>Authentication code</Text>
+          <Text style={styles.pageTitle}>Enter Authentication code</Text>
           <Text style={styles.pageSubtitle}>
-            Enter 5-digit code we just texted to your phone number, +1
-            8976889043
+            Please enter the verification code sent to your email and phone
+            number.
           </Text>
         </View>
 
@@ -94,9 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 24,
     marginTop: 44,
-  },
-  pageHeader: {
-    paddingVertical: 16,
   },
   image: {
     width: 24,

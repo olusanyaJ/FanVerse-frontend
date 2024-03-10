@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
@@ -20,7 +19,7 @@ export default LoginScreen = ({ navigation }) => {
   });
 
   const onPressSignin = () => {
-    navigation.navigate("GetStartedScreen");
+    navigation.navigate("Dashboard");
   };
 
   const onPressGoogle = () => {
@@ -41,7 +40,7 @@ export default LoginScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Welcome Back!</Text>
@@ -91,7 +90,7 @@ export default LoginScreen = ({ navigation }) => {
           </Pressable>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -103,6 +102,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop: 44,
   },
   textContainer: {
     marginVertical: 40,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontFamily: "Manrope-Bold",
     fontSize: 28,
-    fontWeight: 700,
+    // fontWeight: 700,
     lineHeight: 36,
     color: COLORS.primaryTextColor,
     paddingBottom: 8,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   pageSubtitle: {
     fontFamily: "Manrope-Regular",
     fontSize: 16,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 23.8,
     letterSpacing: 0.3,
     color: COLORS.secondaryTextColor,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   fgtPwdText: {
     fontFamily: "Manrope-Bold",
     fontSize: 16,
-    fontWeight: 600,
+    // fontWeight: 600,
     lineHeight: 24,
     letterSpacing: 0.3,
     color: COLORS.thirdTextColor,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   lineBreakText: {
     fontFamily: "Manrope-Regular",
     fontSize: 14,
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.2,
     paddingHorizontal: 12,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 102,
+    marginTop: 52,
   },
   signInText: {
     fontFamily: "Manrope-Light",
@@ -180,11 +180,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,
-    fontWeight: 400,
+    // fontWeight: 400,
   },
   signInLink: {
     fontFamily: "Manrope-Bold",
-    fontWeight: 700,
+    // fontWeight: 700,
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.3,

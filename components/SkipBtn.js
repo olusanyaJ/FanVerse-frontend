@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
+import { Pressable, View, StyleSheet, Text } from "react-native";
 import COLORS from "../utils/colors";
 
 import { useFonts } from "expo-font";
@@ -24,19 +24,19 @@ export default SkipButton = ({ onPressSkip }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <Pressable style={styles.button} onPress={onPressSkip}>
         <Text style={styles.text}>Skip</Text>
       </Pressable>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-start",
+    // justifyContent: "flex-start",
     alignSelf: "flex-end",
-    marginRight: 24,
+    // marginRight: 24,
   },
   button: {
     paddingVertical: 8,
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     color: COLORS.thirdTextColor,
     lineHeight: 20,
     letterSpacing: 0.25,
-    fontWeight: 700,
+    // fontWeight: 700,
   },
 });
