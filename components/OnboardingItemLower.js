@@ -26,7 +26,7 @@ export default OnboardingItemLower = ({ item }) => {
   }
 
   return (
-    <View style={[{ width }]} onLayout={onLayoutRootView}>
+    <View style={[styles.container, { width }]} onLayout={onLayoutRootView}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
     </View>
@@ -34,8 +34,13 @@ export default OnboardingItemLower = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    // marginLeft: 24,
+    // marginRight: 24,
+  },
   title: {
     fontFamily: "Manrope-Bold",
+    width: "85%",
     fontSize: 24,
     color: COLORS.primaryTextColor,
     // fontWeight: 700,
@@ -50,7 +55,7 @@ const styles = StyleSheet.create({
     color: COLORS.secondaryTextColor,
     fontSize: 16,
     lineHeight: 24,
-    paddingBottom: 16,
+    paddingBottom: 8,
     paddingRight: 57,
     letterSpacing: 0.3,
   },

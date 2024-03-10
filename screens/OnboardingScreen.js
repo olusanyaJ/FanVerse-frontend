@@ -130,6 +130,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   btn: {
-    marginTop: 74,
+    marginTop: 70,
   },
 });

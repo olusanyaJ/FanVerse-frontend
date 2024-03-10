@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     letterSpacing: 0.3,
     // fontWeight: 400,
-    textAlign: "center",
   },
   bottomContent: {
     flexDirection: "row",
