@@ -49,11 +49,11 @@ export default LoginScreen = ({ navigation }) => {
         </View>
         <View style={styles.inputContainer}>
           <Input
-            style={
-              errors.email
-                ? styles.inputPlaceholderErr
-                : styles.inputPlaceholder
-            }
+            style={[
+              styles.inputPlaceholder,
+              !errors.email && styles.inputPlaceholder,
+              errors.email && styles.inputPlaceholderErr,
+            ]}
             placeholder={errors.email ? `${errors.email}` : "Email"}
             placeholderTextColor={
               errors.email ? COLORS.primaryBtnColor : COLORS.secondaryTextColor
@@ -68,11 +68,11 @@ export default LoginScreen = ({ navigation }) => {
           <InputPassword
             onChangeText={setPassword}
             value={password}
-            style={
-              errors.password
-                ? styles.inputPlaceholderErr
-                : styles.inputPlaceholder
-            }
+            style={[
+              styles.inputPlaceholder,
+              !errors.password && styles.inputPlaceholder,
+              errors.password && styles.inputPlaceholderErr,
+            ]}
             placeholderTextColor={
               errors.password
                 ? COLORS.primaryBtnColor
@@ -112,7 +112,7 @@ export default LoginScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.bottomContent}>
-          <Text style={styles.signInText}>Don't have an account?</Text>
+          <Text style={styles.signInText}>Don't have an account? </Text>
           <Pressable onPress={() => navigation.navigate("SignupScreen")}>
             <Text style={styles.signInLink}> Sign Up</Text>
           </Pressable>
