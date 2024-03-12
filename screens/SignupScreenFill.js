@@ -40,6 +40,8 @@ export default SignupScreenFill = ({ navigation }) => {
 
       if (!regex.test(number)) {
         errors.number = "Enter a valid Number";
+      } else if (number.length !== 6) {
+        errors.number = "Number must be 6 digits";
       }
     }
 
@@ -116,7 +118,13 @@ export default SignupScreenFill = ({ navigation }) => {
                 !errors.number && styles.inputPlaceholder,
                 errors.number && styles.inputPlaceholderErr,
               ]}
-              onChangeText={setNumber}
+              onChangeText={(text) => {
+                if (errors.number) {
+                  setErrors({});
+                }
+                setNumber(text);
+              }}
+              value={errors.number ? "" : number}
               maxLength={6}
             />
           </View>

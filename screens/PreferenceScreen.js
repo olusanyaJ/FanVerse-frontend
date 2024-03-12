@@ -44,36 +44,35 @@ export default PreferenceScreen = ({ navigation }) => {
   const [footballToggleOn, setFootballToggleOn] = useState(false);
   const [tennisToggleOn, setTennisToggleOn] = useState(false);
   const [selectedTabs, setSelectedTabs] = useState([]);
+  const [errors, setErrors] = useState({});
 
-  const onPress = () => {
-    navigation.navigate("Dashboard");
+  const handleSubmit = () => {
+    let errors = {};
+    if (selectedTabs.length > 0) {
+      setSelectedTabs([]);
+      setErrors({});
+      navigation.navigate("Dashboard");
+    } else {
+      errors.selectedTabs = "Toggle a sport and select at least one tab!!!";
+      setErrors(errors);
+    }
+    return Object.keys(errors).length === 0;
   };
 
   const onPressTab = (text) => {
-    // console.log(text);
     if (selectedTabs.includes(text)) {
       setSelectedTabs((prevTabs) => prevTabs.filter((tab) => tab !== text));
     } else {
       setSelectedTabs((prevTabs) => [...prevTabs, text]);
     }
-    // console.log(selectedTabs);
+    setErrors({});
   };
 
   const toggleFootball = () => {
-    if (!footballToggleOn) {
-      console.log("football Toggle Switched On");
-    } else {
-      console.log("football Toggle Switched Off");
-    }
     setFootballToggleOn((previousState) => !previousState);
   };
 
   const toggleTennis = () => {
-    if (!tennisToggleOn) {
-      console.log("tennis Toggle Switched On");
-    } else {
-      console.log("tennis Toggle Switched Off");
-    }
     setTennisToggleOn((previousState) => !previousState);
   };
 
@@ -88,6 +87,9 @@ export default PreferenceScreen = ({ navigation }) => {
           </Text>
         </View>
         <ScrollView>
+          {errors.selectedTabs && (
+            <Text style={styles.errorText}>{errors.selectedTabs}</Text>
+          )}
           <View style={styles.toggleSection}>
             <View style={styles.toggleContainer}>
               <Text style={styles.toggleText}>Football</Text>
@@ -141,7 +143,7 @@ export default PreferenceScreen = ({ navigation }) => {
           </View>
         </ScrollView>
         <View style={styles.btnContainer}>
-          <Button onPress={onPress} buttonText={"Finish"} />
+          <Button onPress={handleSubmit} buttonText={"Finish"} />
         </View>
       </View>
     </View>
@@ -214,5 +216,11 @@ const styles = StyleSheet.create({
   },
   selectedTabBtn: {
     borderColor: COLORS.thirdTextColor,
+  },
+  errorText: {
+    color: COLORS.primaryBtnColor,
+    fontSize: 16,
+    letterSpacing: 0.5,
+    marginBottom: 16,
   },
 });

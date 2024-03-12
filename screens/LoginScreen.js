@@ -14,6 +14,13 @@ export default LoginScreen = ({ navigation }) => {
   const validateLogin = () => {
     let errors = {};
     if (!email) errors.email = "Email is required";
+    if (email) {
+      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+      if (!regex.test(email)) {
+        errors.email = "Enter a valid email";
+      }
+    }
     if (!password) errors.password = "Password is required";
 
     setErrors(errors);
@@ -23,7 +30,6 @@ export default LoginScreen = ({ navigation }) => {
 
   const handleSubmit = () => {
     if (validateLogin()) {
-      console.log("Submitted!", email, password);
       setEmail("");
       setPassword("");
       setErrors({});
@@ -59,8 +65,13 @@ export default LoginScreen = ({ navigation }) => {
               errors.email ? COLORS.primaryBtnColor : COLORS.secondaryTextColor
             }
             keyboardType={"email-address"}
-            value={email}
-            onChangeText={setEmail}
+            onChangeText={(text) => {
+              if (errors.email) {
+                setErrors({});
+              }
+              setEmail(text);
+            }}
+            value={errors.email ? "" : email}
           />
         </View>
 

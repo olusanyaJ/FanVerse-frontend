@@ -24,11 +24,11 @@ export default SignupScreenAuth = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const onPress = () => {
+  const handleSubmit = () => {
     navigation.navigate("PreferenceScreen");
   };
 
-  const onPressResend = () => {
+  const handleResend = () => {
     navigation.navigate("SignupScreenFill");
   };
 
@@ -69,15 +69,16 @@ export default SignupScreenAuth = ({ navigation }) => {
                 keyboardType={"number-pad"}
                 secureTextEntry={true}
                 maxLength={1}
+                style={styles.inputPlaceholder}
               />
             </View>
           ))}
         </View>
 
         <View style={styles.signinContainer}>
-          <Button onPress={onPress} buttonText={"Confirm"} />
+          <Button onPress={handleSubmit} buttonText={"Confirm"} />
           <View style={styles.resendContainer}>
-            <BtnOutline onPress={onPressResend} buttonText={"Resend code"} />
+            <BtnOutline onPress={handleResend} buttonText={"Resend code"} />
           </View>
         </View>
       </View>
@@ -134,5 +135,14 @@ const styles = StyleSheet.create({
   },
   resendContainer: {
     marginTop: 16,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
   },
 });
