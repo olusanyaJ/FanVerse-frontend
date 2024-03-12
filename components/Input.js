@@ -7,16 +7,24 @@ export default Input = ({
   keyboardType,
   secureTextEntry,
   maxLength,
+  value,
+  onChangeText,
+  placeholderTextColor,
+  style,
 }) => {
   return (
     <View style={styles.inputField}>
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={COLORS.secondaryTextColor}
+        // placeholderTextColor={COLORS.secondaryTextColor}
+        placeholderTextColor={placeholderTextColor}
         keyboardType={keyboardType}
-        style={styles.inputPlaceholder}
+        // style={styles.inputPlaceholder}
+        style={style}
         secureTextEntry={secureTextEntry}
         maxLength={maxLength}
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );
@@ -31,14 +39,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 16,
     backgroundColor: COLORS.inputBgColor,
-  },
-  inputPlaceholder: {
-    width: "100%",
-    fontFamily: "Manrope-Regular",
-    fontSize: 16,
-    // fontWeight: 400,
-    lineHeight: 26,
-    letterSpacing: 0.4,
-    color: COLORS.primaryTextColor,
   },
 });

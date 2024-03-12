@@ -1,57 +1,85 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import Input from "../components/Input";
 import InputPassword from "../components/InputPassword";
 
-SplashScreen.preventAutoHideAsync();
-
 export default LoginScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const onPressSignin = () => {
-    navigation.navigate("Dashboard");
+  const validateLogin = () => {
+    let errors = {};
+    if (!email) errors.email = "Email is required";
+    if (!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
   };
 
-  const onPressGoogle = () => {
-    navigation.navigate("GetStartedScreen");
-  };
-  const onPressApple = () => {
-    navigation.navigate("GetStartedScreen");
-  };
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      console.log("Submitted!", email, password);
+      setEmail("");
+      setPassword("");
+      setErrors({});
+      navigation.navigate("Dashboard");
     }
-  }, [fontsLoaded]);
+  };
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  const handlePressGoogle = () => {
+    console.log("Google button pressed!");
+    // navigation.navigate("GetStartedScreen");
+  };
+  const handlePressApple = () => {
+    console.log("Apple button pressed!");
+    // navigation.navigate("GetStartedScreen");
+  };
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Welcome Back!</Text>
           <Text style={styles.pageSubtitle}>Sign into your account!</Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input placeholder={"Email"} keyboardType={"email-address"} />
+          <Input
+            style={
+              errors.email
+                ? styles.inputPlaceholderErr
+                : styles.inputPlaceholder
+            }
+            placeholder={errors.email ? `${errors.email}` : "Email"}
+            placeholderTextColor={
+              errors.email ? COLORS.primaryBtnColor : COLORS.secondaryTextColor
+            }
+            keyboardType={"email-address"}
+            value={email}
+            onChangeText={setEmail}
+          />
         </View>
 
         <View style={styles.inputContainer}>
-          <InputPassword />
+          <InputPassword
+            onChangeText={setPassword}
+            value={password}
+            style={
+              errors.password
+                ? styles.inputPlaceholderErr
+                : styles.inputPlaceholder
+            }
+            placeholderTextColor={
+              errors.password
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            placeholder={errors.password ? `${errors.password}` : "Password"}
+          />
         </View>
 
         <View style={styles.fgtPwdContainer}>
@@ -61,7 +89,7 @@ export default LoginScreen = ({ navigation }) => {
         </View>
 
         <View>
-          <Button onPress={onPressSignin} buttonText={"Sign in"} />
+          <Button onPress={handleSubmit} buttonText={"Sign in"} />
         </View>
 
         <View style={styles.bottomDivide}>
@@ -72,12 +100,12 @@ export default LoginScreen = ({ navigation }) => {
 
         <View style={styles.btnContainer}>
           <SignInWithBtn
-            onPress={onPressGoogle}
+            onPress={handlePressGoogle}
             buttonText={"Google"}
             icon={require("../assets/icons/Google.png")}
           />
           <SignInWithBtn
-            onPress={onPressApple}
+            onPress={handlePressApple}
             buttonText={"Apple"}
             icon={require("../assets/icons/Apple.png")}
           />
@@ -127,8 +155,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   fgtPwdContainer: {
-    marginTop: 24,
-    marginBottom: 80,
+    marginVertical: 36,
     alignItems: "center",
   },
   fgtPwdText: {
@@ -141,7 +168,7 @@ const styles = StyleSheet.create({
   },
 
   bottomDivide: {
-    marginVertical: 32,
+    marginVertical: 36,
     marginHorizontal: 67,
     flexDirection: "row",
     alignItems: "center",
@@ -189,5 +216,17 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.3,
     color: COLORS.thirdTextColor,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });
