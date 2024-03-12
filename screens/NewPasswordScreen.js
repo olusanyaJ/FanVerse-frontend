@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
@@ -16,8 +16,24 @@ export default NewPasswordScreen = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const onPressSignin = () => {
-    navigation.navigate("ConfirmPasswordScreen");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validateLogin = () => {
+    let errors = {};
+    if (!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      setPassword("");
+      setErrors({});
+      navigation.navigate("ConfirmPasswordScreen");
+    }
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -41,11 +57,25 @@ export default NewPasswordScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.inputContainer}>
-          <InputPassword />
+          <InputPassword
+            onChangeText={setPassword}
+            value={password}
+            style={[
+              styles.inputPlaceholder,
+              !errors.password && styles.inputPlaceholder,
+              errors.password && styles.inputPlaceholderErr,
+            ]}
+            placeholderTextColor={
+              errors.password
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            placeholder={errors.password ? `${errors.password}` : "Password"}
+          />
         </View>
 
         <View>
-          <Button onPress={onPressSignin} buttonText={"Contine"} />
+          <Button onPress={handleSubmit} buttonText={"Contine"} />
         </View>
       </View>
     </View>
@@ -83,5 +113,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 80,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });

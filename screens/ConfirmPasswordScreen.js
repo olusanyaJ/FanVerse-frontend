@@ -17,13 +17,29 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
   });
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const onPress = () => {
-    setIsModalVisible(true);
-    setTimeout(() => {
-      setIsModalVisible(false);
-      navigation.navigate("LoginScreen");
-    }, 2000);
+  const validateLogin = () => {
+    let errors = {};
+    if (!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      setPassword("");
+      setErrors({});
+      setIsModalVisible(true);
+      setTimeout(() => {
+        setIsModalVisible(false);
+        navigation.navigate("LoginScreen");
+      }, 2000);
+      navigation.navigate("ConfirmPasswordScreen");
+    }
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -47,11 +63,25 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.inputContainer}>
-          <InputPassword />
+          <InputPassword
+            onChangeText={setPassword}
+            value={password}
+            style={[
+              styles.inputPlaceholder,
+              !errors.password && styles.inputPlaceholder,
+              errors.password && styles.inputPlaceholderErr,
+            ]}
+            placeholderTextColor={
+              errors.password
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            placeholder={errors.password ? `${errors.password}` : "Password"}
+          />
         </View>
 
         <View>
-          <Button onPress={onPress} buttonText={"Continue"} />
+          <Button onPress={handleSubmit} buttonText={"Continue"} />
         </View>
 
         <View>
@@ -142,5 +172,17 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     letterSpacing: 0,
     color: COLORS.modalMessageTextColor,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });

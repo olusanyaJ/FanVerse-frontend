@@ -38,12 +38,12 @@ export default LoginScreen = ({ navigation }) => {
   };
 
   const handlePressGoogle = () => {
-    console.log("Google button pressed!");
-    // navigation.navigate("GetStartedScreen");
+    // console.log("Google button pressed!");
+    navigation.navigate("GetStartedScreen");
   };
   const handlePressApple = () => {
-    console.log("Apple button pressed!");
-    // navigation.navigate("GetStartedScreen");
+    // console.log("Apple button pressed!");
+    navigation.navigate("GetStartedScreen");
   };
 
   return (
