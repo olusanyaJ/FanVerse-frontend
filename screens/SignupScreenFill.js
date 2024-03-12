@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  Keyboard,
 } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
@@ -26,8 +27,33 @@ export default SignupScreenFill = ({ navigation }) => {
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const onPress = () => {
-    navigation.navigate("SignupScreenAuth");
+  const [number, setNumber] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validateLogin = () => {
+    Keyboard.dismiss();
+    let errors = {};
+    if (!number) errors.number = "Number is required";
+
+    if (number) {
+      const regex = /^[0-9]+$/;
+
+      if (!regex.test(number)) {
+        errors.number = "Enter a valid Number";
+      }
+    }
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      setNumber("");
+      setErrors({});
+      navigation.navigate("SignupScreenAuth");
+    }
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -77,12 +103,27 @@ export default SignupScreenFill = ({ navigation }) => {
           </View>
 
           <View style={styles.inputField}>
-            <Input placeholder={"888999"} keyboardType={"number-pad"} />
+            <Input
+              keyboardType={"number-pad"}
+              placeholder={errors.number ? `${errors.number}` : "888999"}
+              placeholderTextColor={
+                errors.number
+                  ? COLORS.primaryBtnColor
+                  : COLORS.secondaryTextColor
+              }
+              style={[
+                styles.inputPlaceholder,
+                !errors.number && styles.inputPlaceholder,
+                errors.number && styles.inputPlaceholderErr,
+              ]}
+              onChangeText={setNumber}
+              maxLength={6}
+            />
           </View>
         </View>
 
         <View style={styles.signinContainer}>
-          <Button onPress={onPress} buttonText={"Get code"} />
+          <Button onPress={handleSubmit} buttonText={"Get code"} />
         </View>
       </View>
     </View>
@@ -171,5 +212,17 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     letterSpacing: 0.4,
     color: COLORS.primaryTextColor,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });

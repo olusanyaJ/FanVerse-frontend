@@ -41,7 +41,7 @@ export default SignupScreen = ({ navigation }) => {
       setEmail("");
       setPassword("");
       setErrors({});
-      // navigation.navigate("SignupScreenFill");
+      navigation.navigate("SignupScreenFill");
     }
   };
 
