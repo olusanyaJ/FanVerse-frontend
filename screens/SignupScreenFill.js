@@ -1,34 +1,79 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   StyleSheet,
   View,
   Image,
   TouchableOpacity,
-  TextInput,
   Pressable,
   Keyboard,
+  Modal,
+  TouchableWithoutFeedback,
+  useWindowDimensions,
+  FlatList,
 } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
-import usFlag from "../assets/icons/us-flag.png";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import Input from "../components/Input";
 
-SplashScreen.preventAutoHideAsync();
-
 export default SignupScreenFill = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
+  const { width } = useWindowDimensions();
 
   const [number, setNumber] = useState("");
   const [errors, setErrors] = useState({});
+  const [areas, setAreas] = useState([]);
+  const [selectedArea, setSelectedArea] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    fetch("https://restcountries.com/v3.1/all")
+      .then((response) => response.json())
+      .then((data) => {
+        let areaData = data.map((item) => {
+          codeData = item.idd;
+          function getCallingCode(codeData) {
+            const prefix = codeData.root;
+            const suffixes = codeData.suffixes;
+            if (!prefix || !suffixes || suffixes.length === 0) {
+              return null;
+            }
+            let callingCodes = suffixes.map((suffix) => prefix + suffix);
+            callingCodes = callingCodes.map((code) => code.slice(0, 4));
+            const callingCode = callingCodes[0];
+            return callingCode;
+          }
+
+          const callingCode = getCallingCode(codeData);
+
+          return {
+            code: item.cca2,
+            item: item.name.common,
+            callingCode: callingCode,
+            flag: item.flags.png,
+          };
+        });
+        areaData.sort((a, b) => {
+          const nameA = a.item.toLowerCase();
+          const nameB = b.item.toLowerCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        setAreas(areaData);
+        const defaultData = areaData.filter((a) => a.code === "US");
+        if (defaultData.length > 0) {
+          setSelectedArea(defaultData[0]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching countries data:", error);
+      });
+  }, []);
 
   const validateLogin = () => {
     Keyboard.dismiss();
@@ -40,8 +85,6 @@ export default SignupScreenFill = ({ navigation }) => {
 
       if (!regex.test(number)) {
         errors.number = "Enter a valid Number";
-      } else if (number.length !== 6) {
-        errors.number = "Number must be 6 digits";
       }
     }
 
@@ -58,18 +101,45 @@ export default SignupScreenFill = ({ navigation }) => {
     }
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
+  const renderAreasCodesModal = () => {
+    const renderItem = ({ item }) => {
+      return (
+        <TouchableOpacity
+          style={styles.modalContainerDrpdwn}
+          onPress={() => {
+            setSelectedArea(item), setModalVisible(false);
+          }}
+        >
+          <Image
+            source={{ uri: item.flag }}
+            resizeMode="contain"
+            style={styles.modalImg}
+          />
+          <Text style={styles.modalTxt}>{item.item}</Text>
+        </TouchableOpacity>
+      );
+    };
+    return (
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.modalContainer}>
+            <View style={[styles.modal, { width: width * 0.8 }]}>
+              <FlatList
+                data={areas}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.code}
+                showsVerticalScrollIndicator={false}
+                style={styles.ftc}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    );
+  };
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
           <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
@@ -87,19 +157,23 @@ export default SignupScreenFill = ({ navigation }) => {
             account.
           </Text>
         </View>
-
         <View style={styles.inputContainer}>
           <View style={styles.countryField}>
-            <TouchableOpacity style={styles.countryInput}>
+            <TouchableOpacity
+              style={styles.countryInput}
+              onPress={() => setModalVisible(true)}
+            >
               <View style={styles.flagContainer}>
                 <Image
-                  source={usFlag}
+                  source={{ uri: selectedArea?.flag }}
                   resizeMode="contain"
                   style={styles.image}
                 />
               </View>
               <View>
-                <Text style={styles.countryCode}>+1</Text>
+                <Text style={styles.countryCode}>
+                  {selectedArea?.callingCode}
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -107,7 +181,7 @@ export default SignupScreenFill = ({ navigation }) => {
           <View style={styles.inputField}>
             <Input
               keyboardType={"number-pad"}
-              placeholder={errors.number ? `${errors.number}` : "888999"}
+              placeholder={errors.number ? `${errors.number}` : "8 8 8 9 9 9"}
               placeholderTextColor={
                 errors.number
                   ? COLORS.primaryBtnColor
@@ -125,14 +199,13 @@ export default SignupScreenFill = ({ navigation }) => {
                 setNumber(text);
               }}
               value={errors.number ? "" : number}
-              maxLength={6}
             />
           </View>
         </View>
-
         <View style={styles.signinContainer}>
           <Button onPress={handleSubmit} buttonText={"Get code"} />
         </View>
+        {renderAreasCodesModal()}
       </View>
     </View>
   );
@@ -147,6 +220,28 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 24,
     marginTop: 44,
+  },
+  modalContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalContainerDrpdwn: {
+    paddingVertical: 16,
+    paddingHorizontal: 8,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  modal: {
+    marginTop: 160,
+    height: 400,
+    color: COLORS.primaryTextColor,
+    backgroundColor: COLORS.inputBgColor,
+    borderRadius: 12,
+  },
+  ftc: {
+    padding: 20,
+    marginBottom: 20,
   },
   pageHeader: {
     paddingVertical: 16,
@@ -182,7 +277,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   countryField: {
-    width: "25%",
+    width: "27.5%",
     alignItems: "center",
     justifyContent: "center",
     height: 56,
@@ -201,7 +296,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     flexDirection: "row",
-    width: "70%",
+    width: "67.5%",
   },
   inputPlaceholder: {
     width: "100%",
@@ -232,5 +327,14 @@ const styles = StyleSheet.create({
   },
   inputPlaceholderErr: {
     fontSize: 18,
+  },
+  modalImg: {
+    height: 24,
+    width: 24,
+    marginRight: 16,
+  },
+  modalTxt: {
+    fontSize: 16,
+    color: COLORS.primaryTextColor,
   },
 });
