@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
 import Input from "../components/Input";
 import InputPassword from "../components/InputPassword";
+
+import axios from "axios";
+import { StackActions } from "@react-navigation/native";
 
 export default LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -28,21 +31,35 @@ export default LoginScreen = ({ navigation }) => {
     return Object.keys(errors).length === 0;
   };
 
+  const handleLoginFetch = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.1.73:8000/fanverse/api/user/login",
+        { email, password }
+      );
+      if (response) {
+        navigation.dispatch(
+          StackActions.replace("Dashboard", { token: response.data.token })
+        );
+      }
+    } catch (error) {
+      throw error.message;
+    }
+  };
+
   const handleSubmit = () => {
     if (validateLogin()) {
       setEmail("");
       setPassword("");
       setErrors({});
-      navigation.navigate("Dashboard");
+      handleLoginFetch();
     }
   };
 
   const handlePressGoogle = () => {
-    // console.log("Google button pressed!");
     navigation.navigate("GetStartedScreen");
   };
   const handlePressApple = () => {
-    // console.log("Apple button pressed!");
     navigation.navigate("GetStartedScreen");
   };
 
