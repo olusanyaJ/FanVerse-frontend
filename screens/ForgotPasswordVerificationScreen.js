@@ -1,41 +1,45 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 import BtnOutline from "../components/BtnOutline";
-import Input from "../components/Input";
-
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
+import OTPInput from "../components/OTPInput";
 
 export default ForgotPasswordVerificationScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
+  const [code, setCode] = useState(Array(5).fill(""));
+  // const [code, setCode] = useState(Array.from({ length: 5 }, () => ""));
+  const [errors, setErrors] = useState({});
+
+  // const validateCode = () => {
+  //   let errors = {};
+  //   if (!code || code.length === 0) {
+  //     errors.code = "OTP code is required";
+  //     return;
+  //   }
+  //   setErrors(errors);
+  //   return Object.keys(errors).length === 0;
+  // };
 
   const onPress = () => {
-    navigation.navigate("NewPasswordScreen");
+    // if (validateCode()) {
+    //   setErrors(errors);
+    //   setCode(Array(5).fill(""));
+    //   console.log("pressed");
+    //   const generatedOTPCode = code.join("");
+    //   console.log(generatedOTPCode);
+    // }
+
+    console.log("pressed");
+    const generatedOTPCode = code.join("");
+    console.log(generatedOTPCode);
   };
 
   const onPressResend = () => {
-    navigation.navigate("SignupScreenFill");
+    navigation.navigate("ForgotPassword");
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Enter Authentication code</Text>
@@ -45,17 +49,10 @@ export default ForgotPasswordVerificationScreen = ({ navigation }) => {
           </Text>
         </View>
 
-        <View style={styles.inputContainer}>
-          {[...Array(5)].map((_, index) => (
-            <View style={styles.inputField} key={index}>
-              <Input
-                placeholder={" "}
-                keyboardType={"number-pad"}
-                secureTextEntry={true}
-                maxLength={1}
-              />
-            </View>
-          ))}
+        <View>
+          <OTPInput length={5} value={code} onChange={setCode} />
+
+          {errors.code && <Text style={styles.errorText}>{errors.code}</Text>}
         </View>
 
         <View style={styles.signinContainer}>
@@ -115,5 +112,11 @@ const styles = StyleSheet.create({
   },
   resendContainer: {
     marginTop: 16,
+  },
+  errorText: {
+    color: COLORS.primaryBtnColor,
+    fontSize: 16,
+    letterSpacing: 0.5,
+    marginBottom: 16,
   },
 });

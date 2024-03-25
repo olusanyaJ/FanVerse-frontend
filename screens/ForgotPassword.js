@@ -1,23 +1,16 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
+import axios from "axios";
+import { StackActions } from "@react-navigation/native";
+
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import Input from "../components/Input";
-
-SplashScreen.preventAutoHideAsync();
 
 export default ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
 
   const validateLogin = () => {
     let errors = {};
@@ -35,26 +28,34 @@ export default ForgotPassword = ({ navigation }) => {
     return Object.keys(errors).length === 0;
   };
 
+  const handleForgotPasswordVerification = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.1.73:8000/fanverse/api/password/",
+        { email }
+      );
+      if (response) {
+        navigation.dispatch(
+          StackActions.replace("ForgotPasswordVerificationScreen", {
+            token: response.data.token,
+          })
+        );
+      }
+    } catch (error) {
+      throw error.message;
+    }
+  };
+
   const handleSubmit = () => {
     if (validateLogin()) {
       setEmail("");
       setErrors({});
-      navigation.navigate("ForgotPasswordVerificationScreen");
+      handleForgotPasswordVerification();
     }
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Forgot Password?</Text>

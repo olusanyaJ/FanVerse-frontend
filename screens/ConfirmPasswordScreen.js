@@ -1,21 +1,14 @@
-import React, { useCallback, useState } from "react";
 import { Text, StyleSheet, View, Modal, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import InputPassword from "../components/InputPassword";
+import { useState } from "react";
 
-SplashScreen.preventAutoHideAsync();
+import axios from "axios";
+import { StackActions } from "@react-navigation/native";
 
 export default ConfirmPasswordScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -29,31 +22,42 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
     return Object.keys(errors).length === 0;
   };
 
+  const handlePasswordReset = async () => {
+    try {
+      const { email, otp, password } = response;
+      console.log(email);
+      console.log(otp);
+      console.log(password);
+      // const response = await axios.post(
+      //   "http://192.168.1.73:8000/fanverse/api/password/reset",
+      //   { email, otp, password }
+      // );
+      // if (response) {
+      //   setIsModalVisible(true);
+      //   setTimeout(() => {
+      //     setIsModalVisible(false);
+      //     navigation.dispatch(
+      //       StackActions.replace("LoginScreen", {
+      //         token: response.data.token,
+      //       })
+      //     );
+      //   }, 2000);
+      // }
+    } catch (error) {
+      throw error.message;
+    }
+  };
+
   const handleSubmit = () => {
     if (validateLogin()) {
       setPassword("");
       setErrors({});
-      setIsModalVisible(true);
-      setTimeout(() => {
-        setIsModalVisible(false);
-        navigation.navigate("LoginScreen");
-      }, 2000);
-      navigation.navigate("ConfirmPasswordScreen");
+      handlePasswordReset();
     }
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Confirm New Password</Text>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
@@ -37,7 +37,7 @@ export default LoginScreen = ({ navigation }) => {
         "http://192.168.1.73:8000/fanverse/api/user/login",
         { email, password }
       );
-      if (response) {
+      if (response && response.data.token) {
         navigation.dispatch(
           StackActions.replace("Dashboard", { token: response.data.token })
         );
