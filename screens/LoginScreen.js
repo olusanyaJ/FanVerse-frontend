@@ -1,57 +1,113 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import Input from "../components/Input";
 import InputPassword from "../components/InputPassword";
 
-SplashScreen.preventAutoHideAsync();
+import axios from "axios";
+import { StackActions } from "@react-navigation/native";
 
 export default LoginScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const onPressSignin = () => {
-    navigation.navigate("Dashboard");
-  };
+  const validateLogin = () => {
+    let errors = {};
+    if (!email) errors.email = "Email is required";
+    if (email) {
+      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-  const onPressGoogle = () => {
-    navigation.navigate("GetStartedScreen");
-  };
-  const onPressApple = () => {
-    navigation.navigate("GetStartedScreen");
-  };
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
+      if (!regex.test(email)) {
+        errors.email = "Enter a valid email";
+      }
     }
-  }, [fontsLoaded]);
+    if (!password) errors.password = "Password is required";
 
-  if (!fontsLoaded) {
-    return null;
-  }
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleLoginFetch = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.1.73:8000/fanverse/api/user/login",
+        { email, password }
+      );
+      if (response && response.data.token) {
+        navigation.dispatch(
+          StackActions.replace("Dashboard", { token: response.data.token })
+        );
+      }
+    } catch (error) {
+      throw error.message;
+    }
+  };
+
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      setEmail("");
+      setPassword("");
+      setErrors({});
+      handleLoginFetch();
+    }
+  };
+
+  const handlePressGoogle = () => {
+    navigation.navigate("GetStartedScreen");
+  };
+  const handlePressApple = () => {
+    navigation.navigate("GetStartedScreen");
+  };
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Welcome Back!</Text>
           <Text style={styles.pageSubtitle}>Sign into your account!</Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input placeholder={"Email"} keyboardType={"email-address"} />
+          <Input
+            style={[
+              styles.inputPlaceholder,
+              !errors.email && styles.inputPlaceholder,
+              errors.email && styles.inputPlaceholderErr,
+            ]}
+            placeholder={errors.email ? `${errors.email}` : "Email"}
+            placeholderTextColor={
+              errors.email ? COLORS.primaryBtnColor : COLORS.secondaryTextColor
+            }
+            keyboardType={"email-address"}
+            onChangeText={(text) => {
+              if (errors.email) {
+                setErrors({});
+              }
+              setEmail(text);
+            }}
+            value={errors.email ? "" : email}
+          />
         </View>
 
         <View style={styles.inputContainer}>
-          <InputPassword />
+          <InputPassword
+            onChangeText={setPassword}
+            value={password}
+            style={[
+              styles.inputPlaceholder,
+              !errors.password && styles.inputPlaceholder,
+              errors.password && styles.inputPlaceholderErr,
+            ]}
+            placeholderTextColor={
+              errors.password
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            placeholder={errors.password ? `${errors.password}` : "Password"}
+          />
         </View>
 
         <View style={styles.fgtPwdContainer}>
@@ -61,7 +117,7 @@ export default LoginScreen = ({ navigation }) => {
         </View>
 
         <View>
-          <Button onPress={onPressSignin} buttonText={"Sign in"} />
+          <Button onPress={handleSubmit} buttonText={"Sign in"} />
         </View>
 
         <View style={styles.bottomDivide}>
@@ -72,19 +128,19 @@ export default LoginScreen = ({ navigation }) => {
 
         <View style={styles.btnContainer}>
           <SignInWithBtn
-            onPress={onPressGoogle}
+            onPress={handlePressGoogle}
             buttonText={"Google"}
             icon={require("../assets/icons/Google.png")}
           />
           <SignInWithBtn
-            onPress={onPressApple}
+            onPress={handlePressApple}
             buttonText={"Apple"}
             icon={require("../assets/icons/Apple.png")}
           />
         </View>
 
         <View style={styles.bottomContent}>
-          <Text style={styles.signInText}>Don't have an account?</Text>
+          <Text style={styles.signInText}>Don't have an account? </Text>
           <Pressable onPress={() => navigation.navigate("SignupScreen")}>
             <Text style={styles.signInLink}> Sign Up</Text>
           </Pressable>
@@ -127,8 +183,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   fgtPwdContainer: {
-    marginTop: 24,
-    marginBottom: 80,
+    marginVertical: 36,
     alignItems: "center",
   },
   fgtPwdText: {
@@ -141,7 +196,7 @@ const styles = StyleSheet.create({
   },
 
   bottomDivide: {
-    marginVertical: 32,
+    marginVertical: 36,
     marginHorizontal: 67,
     flexDirection: "row",
     alignItems: "center",
@@ -189,5 +244,17 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.3,
     color: COLORS.thirdTextColor,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });

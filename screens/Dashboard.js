@@ -1,20 +1,18 @@
 import React from "react";
-import { Text, StyleSheet, Pressable, View } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  View,
+  ImageBackground,
+} from "react-native";
 
 export default UserDashboard = ({ navigation }) => {
+  const image = require("../assets/imgs/Profile.png");
+
   return (
     <View style={styles.container}>
-      <Text
-        style={{
-          padding: 16,
-          marginTop: 16,
-          fontSize: 36,
-          color: "#0F172A",
-          textAlign: "center",
-        }}
-      >
-        This UserDashboard screen is under construction{" "}
-      </Text>
+      <ImageBackground source={image} style={styles.image}></ImageBackground>
       <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
         <Text
           style={{
@@ -35,6 +33,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    backgroundColor: COLORS.appBackgroundColor,
+  },
+  image: {
+    flex: 1,
+    width: "100%",
+    resizeMode: "cover",
     justifyContent: "center",
   },
 });

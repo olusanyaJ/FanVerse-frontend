@@ -1,43 +1,63 @@
-import React, { useCallback, useState } from "react";
 import { Text, StyleSheet, View, Modal, Pressable } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import InputPassword from "../components/InputPassword";
+import { useState } from "react";
 
-SplashScreen.preventAutoHideAsync();
+import axios from "axios";
+import { StackActions } from "@react-navigation/native";
 
 export default ConfirmPasswordScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
-
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const onPress = () => {
-    setIsModalVisible(true);
-    setTimeout(() => {
-      setIsModalVisible(false);
-      navigation.navigate("LoginScreen");
-    }, 2000);
+  const validateLogin = () => {
+    let errors = {};
+    if (!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
+  const handlePasswordReset = async () => {
+    try {
+      const { email, otp, password } = response;
+      console.log(email);
+      console.log(otp);
+      console.log(password);
+      // const response = await axios.post(
+      //   "http://192.168.1.73:8000/fanverse/api/password/reset",
+      //   { email, otp, password }
+      // );
+      // if (response) {
+      //   setIsModalVisible(true);
+      //   setTimeout(() => {
+      //     setIsModalVisible(false);
+      //     navigation.dispatch(
+      //       StackActions.replace("LoginScreen", {
+      //         token: response.data.token,
+      //       })
+      //     );
+      //   }, 2000);
+      // }
+    } catch (error) {
+      throw error.message;
     }
-  }, [fontsLoaded]);
+  };
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      setPassword("");
+      setErrors({});
+      handlePasswordReset();
+    }
+  };
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Confirm New Password</Text>
@@ -47,11 +67,25 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.inputContainer}>
-          <InputPassword />
+          <InputPassword
+            onChangeText={setPassword}
+            value={password}
+            style={[
+              styles.inputPlaceholder,
+              !errors.password && styles.inputPlaceholder,
+              errors.password && styles.inputPlaceholderErr,
+            ]}
+            placeholderTextColor={
+              errors.password
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            placeholder={errors.password ? `${errors.password}` : "Password"}
+          />
         </View>
 
         <View>
-          <Button onPress={onPress} buttonText={"Continue"} />
+          <Button onPress={handleSubmit} buttonText={"Continue"} />
         </View>
 
         <View>
@@ -142,5 +176,17 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     letterSpacing: 0,
     color: COLORS.modalMessageTextColor,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Text, StyleSheet, View, Pressable, Image } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
@@ -12,14 +12,43 @@ import InputPassword from "../components/InputPassword";
 SplashScreen.preventAutoHideAsync();
 
 export default SignupScreen = ({ navigation }) => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validateLogin = () => {
+    let errors = {};
+    if (!username) errors.username = "Username is required";
+    if (!email) errors.email = "Email is required";
+    if (email) {
+      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+      if (!regex.test(email)) {
+        errors.email = "Enter a valid email";
+      }
+    }
+    if (!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
     "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
   });
 
-  const onPressSignin = () => {
-    navigation.navigate("SignupScreenFill");
+  const handleSubmit = () => {
+    if (validateLogin()) {
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setErrors({});
+      navigation.navigate("SignupScreenFill");
+    }
   };
 
   const onPressGoogle = () => {
@@ -58,18 +87,65 @@ export default SignupScreen = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input placeholder={"Username"} keyboardType={"default"} />
+          <Input
+            placeholder={errors.username ? `${errors.username}` : "Username"}
+            placeholderTextColor={
+              errors.username
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            style={[
+              styles.inputPlaceholder,
+              !errors.username && styles.inputPlaceholder,
+              errors.username && styles.inputPlaceholderErr,
+            ]}
+            keyboardType={"default"}
+            value={username}
+            onChangeText={setUsername}
+          />
         </View>
         <View style={styles.inputContainer}>
-          <Input placeholder={"Email"} keyboardType={"email-address"} />
+          <Input
+            style={[
+              styles.inputPlaceholder,
+              !errors.email && styles.inputPlaceholder,
+              errors.email && styles.inputPlaceholderErr,
+            ]}
+            placeholder={errors.email ? `${errors.email}` : "Email"}
+            placeholderTextColor={
+              errors.email ? COLORS.primaryBtnColor : COLORS.secondaryTextColor
+            }
+            keyboardType={"email-address"}
+            onChangeText={(text) => {
+              if (errors.email) {
+                setErrors({});
+              }
+              setEmail(text);
+            }}
+            value={errors.email ? "" : email}
+          />
         </View>
 
         <View style={styles.inputContainer}>
-          <InputPassword />
+          <InputPassword
+            onChangeText={setPassword}
+            value={password}
+            style={[
+              styles.inputPlaceholder,
+              !errors.password && styles.inputPlaceholder,
+              errors.password && styles.inputPlaceholderErr,
+            ]}
+            placeholderTextColor={
+              errors.password
+                ? COLORS.primaryBtnColor
+                : COLORS.secondaryTextColor
+            }
+            placeholder={errors.password ? `${errors.password}` : "Password"}
+          />
         </View>
 
         <View style={styles.signinContainer}>
-          <Button onPress={onPressSignin} buttonText={"Sign up"} />
+          <Button onPress={handleSubmit} buttonText={"Sign up"} />
           <View style={styles.signinTerms}>
             <Text style={styles.termsText}>
               By signing up, you agree to the
@@ -229,5 +305,17 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.3,
     color: COLORS.thirdTextColor,
+  },
+  inputPlaceholder: {
+    width: "100%",
+    fontFamily: "Manrope-Regular",
+    fontSize: 16,
+    // fontWeight: 400,
+    lineHeight: 26,
+    letterSpacing: 0.4,
+    color: COLORS.primaryTextColor,
+  },
+  inputPlaceholderErr: {
+    fontSize: 18,
   },
 });

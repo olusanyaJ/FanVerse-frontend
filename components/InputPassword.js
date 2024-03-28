@@ -3,16 +3,24 @@ import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import COLORS from "../utils/colors";
 
-export default InputPassword = () => {
+export default InputPassword = ({
+  value,
+  style,
+  onChangeText,
+  placeholder,
+  placeholderTextColor,
+}) => {
   const [isPasswordShown, setIsPasswordShown] = useState(true);
 
   return (
     <View style={styles.inputField}>
       <TextInput
-        placeholder="Password"
-        placeholderTextColor={COLORS.secondaryTextColor}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         secureTextEntry={isPasswordShown}
-        style={styles.inputPlaceholder}
+        style={style}
       />
 
       <TouchableOpacity
@@ -38,15 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 16,
     backgroundColor: COLORS.inputBgColor,
-  },
-  inputPlaceholder: {
-    width: "100%",
-    fontFamily: "Manrope-Regular",
-    fontSize: 16,
-    // fontWeight: 400,
-    lineHeight: 26,
-    letterSpacing: 0.4,
-    color: COLORS.primaryTextColor,
   },
   passwordIcon: {
     position: "absolute",
