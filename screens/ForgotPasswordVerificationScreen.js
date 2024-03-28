@@ -5,7 +5,8 @@ import COLORS from "../utils/colors";
 import BtnOutline from "../components/BtnOutline";
 import OTPInput from "../components/OTPInput";
 
-export default ForgotPasswordVerificationScreen = ({ navigation }) => {
+export default ForgotPasswordVerificationScreen = ({ navigation, route }) => {
+  const { email } = route.params;
   const [code, setCode] = useState(Array(5).fill(""));
   // const [code, setCode] = useState(Array.from({ length: 5 }, () => ""));
   const [errors, setErrors] = useState({});
@@ -29,9 +30,11 @@ export default ForgotPasswordVerificationScreen = ({ navigation }) => {
     //   console.log(generatedOTPCode);
     // }
 
-    console.log("pressed");
     const generatedOTPCode = code.join("");
-    console.log(generatedOTPCode);
+    navigation.navigate("NewPasswordScreen", {
+      generatedOTPCode: generatedOTPCode,
+      email: email,
+    });
   };
 
   const onPressResend = () => {

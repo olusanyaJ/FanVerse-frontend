@@ -8,51 +8,62 @@ import { useState } from "react";
 import axios from "axios";
 import { StackActions } from "@react-navigation/native";
 
-export default ConfirmPasswordScreen = ({ navigation }) => {
+export default ConfirmPasswordScreen = ({ navigation, route }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [errors, setErrors] = useState({});
-
+  const { generatedOTPCode, email, password } = route.params;
   const validateLogin = () => {
     let errors = {};
-    if (!password) errors.password = "Password is required";
+    if (!newPassword) errors.newPassword = "Password is required";
 
     setErrors(errors);
 
     return Object.keys(errors).length === 0;
   };
 
-  const handlePasswordReset = async () => {
-    try {
-      const { email, otp, password } = response;
+  // const handlePasswordReset = async () => {
+  //   try {
+  //     const { email, otp, password } = response;
+  //     console.log(email);
+  //     console.log(otp);
+  //     console.log(password);
+  //     const response = await axios.post(
+  //       "http://192.168.1.73:8000/fanverse/api/password/reset",
+  //       { email, otp, password }
+  //     );
+  //     if (response) {
+  //       setIsModalVisible(true);
+  //       setTimeout(() => {
+  //         setIsModalVisible(false);
+  //         navigation.dispatch(
+  //           StackActions.replace("LoginScreen", {
+  //             token: response.data.token,
+  //           })
+  //         );
+  //       }, 2000);
+  //     }
+  //   } catch (error) {
+  //     throw error.message;
+  //   }
+  // };
+
+  const onPressResend = () => {
+    if (newPassword === password) {
       console.log(email);
-      console.log(otp);
+      console.log(generatedOTPCode);
+      console.log(newPassword);
       console.log(password);
-      // const response = await axios.post(
-      //   "http://192.168.1.73:8000/fanverse/api/password/reset",
-      //   { email, otp, password }
-      // );
-      // if (response) {
-      //   setIsModalVisible(true);
-      //   setTimeout(() => {
-      //     setIsModalVisible(false);
-      //     navigation.dispatch(
-      //       StackActions.replace("LoginScreen", {
-      //         token: response.data.token,
-      //       })
-      //     );
-      //   }, 2000);
-      // }
-    } catch (error) {
-      throw error.message;
+      navigation.navigate("LoginScreen");
     }
   };
 
   const handleSubmit = () => {
     if (validateLogin()) {
-      setPassword("");
+      setNewPassword("");
       setErrors({});
-      handlePasswordReset();
+      // handlePasswordReset();
+      onPressResend();
     }
   };
 
@@ -68,19 +79,21 @@ export default ConfirmPasswordScreen = ({ navigation }) => {
 
         <View style={styles.inputContainer}>
           <InputPassword
-            onChangeText={setPassword}
-            value={password}
+            onChangeText={setNewPassword}
+            value={newPassword}
             style={[
               styles.inputPlaceholder,
-              !errors.password && styles.inputPlaceholder,
-              errors.password && styles.inputPlaceholderErr,
+              !errors.newPassword && styles.inputPlaceholder,
+              errors.newPassword && styles.inputPlaceholderErr,
             ]}
             placeholderTextColor={
-              errors.password
+              errors.newPassword
                 ? COLORS.primaryBtnColor
                 : COLORS.secondaryTextColor
             }
-            placeholder={errors.password ? `${errors.password}` : "Password"}
+            placeholder={
+              errors.newPassword ? `${errors.newPassword}` : "Password"
+            }
           />
         </View>
 

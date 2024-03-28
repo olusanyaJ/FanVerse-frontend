@@ -31,20 +31,26 @@ export default LoginScreen = ({ navigation }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleLoginFetch = async () => {
-    try {
-      const response = await axios.post(
-        "http://192.168.1.73:8000/fanverse/api/user/login",
-        { email, password }
-      );
-      if (response && response.data.token) {
-        navigation.dispatch(
-          StackActions.replace("Dashboard", { token: response.data.token })
-        );
-      }
-    } catch (error) {
-      throw error.message;
-    }
+  // const handleLoginFetch = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://192.168.1.73:8000/fanverse/api/user/login",
+  //       { email, password }
+  //     );
+  //     if (response && response.data.token) {
+  //       navigation.dispatch(
+  //         StackActions.replace("Dashboard", { token: response.data.token })
+  //       );
+  //     }
+  //   } catch (error) {
+  //     throw error.message;
+  //   }
+  // };
+
+  const onPressResend = () => {
+    console.log(email);
+    console.log(password);
+    navigation.navigate("Dashboard");
   };
 
   const handleSubmit = () => {
@@ -52,7 +58,8 @@ export default LoginScreen = ({ navigation }) => {
       setEmail("");
       setPassword("");
       setErrors({});
-      handleLoginFetch();
+      onPressResend();
+      // handleLoginFetch();
     }
   };
 

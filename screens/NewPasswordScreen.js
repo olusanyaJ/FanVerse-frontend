@@ -1,20 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import InputPassword from "../components/InputPassword";
 
-SplashScreen.preventAutoHideAsync();
-
-export default NewPasswordScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
+export default NewPasswordScreen = ({ navigation, route }) => {
+  const { email, generatedOTPCode } = route.params;
 
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -32,22 +24,16 @@ export default NewPasswordScreen = ({ navigation }) => {
     if (validateLogin()) {
       setPassword("");
       setErrors({});
-      navigation.navigate("ConfirmPasswordScreen");
+      navigation.navigate("ConfirmPasswordScreen", {
+        generatedOTPCode: generatedOTPCode,
+        password: password,
+        email: email,
+      });
     }
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Enter a New Password</Text>

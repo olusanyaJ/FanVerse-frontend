@@ -1,15 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View, Pressable, Image } from "react-native";
 import Button from "../components/Button";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
 import Input from "../components/Input";
 import InputPassword from "../components/InputPassword";
-
-SplashScreen.preventAutoHideAsync();
 
 export default SignupScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -35,12 +30,6 @@ export default SignupScreen = ({ navigation }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
-
   const handleSubmit = () => {
     if (validateLogin()) {
       setUsername("");
@@ -58,18 +47,8 @@ export default SignupScreen = ({ navigation }) => {
     navigation.navigate("GetStartedScreen");
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
           <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>

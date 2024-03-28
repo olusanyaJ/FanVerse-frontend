@@ -28,29 +28,36 @@ export default ForgotPassword = ({ navigation }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleForgotPasswordVerification = async () => {
-    try {
-      const response = await axios.post(
-        "http://192.168.1.73:8000/fanverse/api/password/",
-        { email }
-      );
-      if (response) {
-        navigation.dispatch(
-          StackActions.replace("ForgotPasswordVerificationScreen", {
-            token: response.data.token,
-          })
-        );
-      }
-    } catch (error) {
-      throw error.message;
-    }
+  // const handleForgotPasswordVerification = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://192.168.1.73:8000/fanverse/api/password/",
+  //       { email }
+  //     );
+  //     if (response) {
+  //       navigation.dispatch(
+  //         StackActions.replace("ForgotPasswordVerificationScreen", {
+  //           token: response.data.token,
+  //         })
+  //       );
+  //     }
+  //   } catch (error) {
+  //     throw error.message;
+  //   }
+  // };
+
+  const onPressResend = () => {
+    navigation.navigate("ForgotPasswordVerificationScreen", {
+      email: email,
+    });
   };
 
   const handleSubmit = () => {
     if (validateLogin()) {
       setEmail("");
       setErrors({});
-      handleForgotPasswordVerification();
+      onPressResend();
+      // handleForgotPasswordVerification();
     }
   };
 
