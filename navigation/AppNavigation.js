@@ -11,8 +11,14 @@ import ForgotPasswordVerificationScreen from "../screens/ForgotPasswordVerificat
 import NewPasswordScreen from "../screens/NewPasswordScreen";
 import ConfirmPasswordScreen from "../screens/ConfirmPasswordScreen";
 import PreferenceScreen from "../screens/PreferenceScreen";
-import Dashboard from "../screens/Dashboard";
+import Home from "../screens/Home";
+import LivescoreScreen from "../screens/LivescoreScreen";
+import CreateScreen from "../screens/CreateScreen";
+import NotificationScreen from "../screens/NotificationScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+
 import PlaceholderScreen from "../screens/PlaceholderScreen";
+import BottomTabNavigation from "./BottomTabNavigation";
 
 const Stack = createNativeStackNavigator();
 
@@ -87,14 +93,44 @@ export default appNaviagtion = () => {
         />
 
         <Stack.Screen
-          name="Dashboard"
-          component={Dashboard}
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="LivescoreScreen"
+          component={LivescoreScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="CreateScreen"
+          component={CreateScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="NotificationScreen"
+          component={NotificationScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
           options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="PlaceholderScreen"
           component={PlaceholderScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="BottomTabNavigation"
+          component={BottomTabNavigation}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

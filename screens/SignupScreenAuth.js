@@ -18,7 +18,8 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-export default SignupScreenAuth = ({ navigation }) => {
+export default SignupScreenAuth = ({ navigation, route }) => {
+  const { email } = route.params;
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
     "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
@@ -56,8 +57,8 @@ export default SignupScreenAuth = ({ navigation }) => {
         <View style={styles.textContainer}>
           <Text style={styles.pageTitle}>Authentication code</Text>
           <Text style={styles.pageSubtitle}>
-            Enter 5-digit code we just texted to your phone number, +1
-            8976889043
+            Enter 5-digit code we just sent to your email address:
+            {email}
           </Text>
         </View>
 

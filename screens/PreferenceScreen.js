@@ -51,7 +51,7 @@ export default PreferenceScreen = ({ navigation }) => {
     if (selectedTabs.length > 0) {
       setSelectedTabs([]);
       setErrors({});
-      navigation.navigate("Dashboard");
+      navigation.navigate("BottomTabNavigation");
     } else {
       errors.selectedTabs = "Toggle a sport and select at least one tab!!!";
       setErrors(errors);

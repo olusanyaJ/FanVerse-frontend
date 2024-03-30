@@ -70,6 +70,7 @@ export default ForgotPassword = ({ navigation }) => {
             Enter your email address linked to your FanVerse account.
           </Text>
         </View>
+
         <View style={styles.inputContainer}>
           <Input
             style={[
@@ -90,7 +91,6 @@ export default ForgotPassword = ({ navigation }) => {
             }}
             value={errors.email ? "" : email}
           />
-          {/* <Input placeholder={"Email"} keyboardType={"email-address"} /> */}
         </View>
 
         <View style={styles.btnContainer}>

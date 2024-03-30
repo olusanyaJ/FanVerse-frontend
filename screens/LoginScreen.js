@@ -50,7 +50,7 @@ export default LoginScreen = ({ navigation }) => {
   const onPressResend = () => {
     console.log(email);
     console.log(password);
-    navigation.navigate("Dashboard");
+    navigation.navigate("BottomTabNavigation", { name: "Dashboard" });
   };
 
   const handleSubmit = () => {
