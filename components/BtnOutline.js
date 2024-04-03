@@ -1,32 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import { Pressable, StyleSheet, Text } from "react-native";
-import { useFonts } from "expo-font";
 import COLORS from "../utils/colors";
 
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
-
 export default BtnOutline = ({ buttonText, onPress }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-  });
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
-    <Pressable
-      style={styles.button}
-      onPress={onPress}
-      onLayout={onLayoutRootView}
-    >
+    <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{buttonText}</Text>
     </Pressable>
   );

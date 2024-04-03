@@ -1,21 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Button from "../components/Button";
 import SignInWithBtn from "../components/SignInWithBtn";
 import COLORS from "../utils/colors";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
-
 export default GetStartedScreen = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
   const onPressEmail = () => {
     navigation.navigate("LoginScreen");
   };
@@ -27,18 +16,8 @@ export default GetStartedScreen = ({ navigation }) => {
     navigation.navigate("LoginScreen");
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           source={require("../assets/imgs/getStartedToggleBgImg.png")}

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, Pressable } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import LivescoreScreen from "../screens/LivescoreScreen";
@@ -28,8 +28,8 @@ const screenOptions = {
     height: 64,
     paddingVertical: 8,
     backgroundColor: COLORS.appBackgroundColor,
-    borderTopWidth: 1,
     borderTopColor: COLORS.lineBreakColor,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
 };
 

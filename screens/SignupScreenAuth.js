@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
   Text,
   StyleSheet,
@@ -12,18 +12,8 @@ import COLORS from "../utils/colors";
 import BtnOutline from "../components/BtnOutline";
 import Input from "../components/Input";
 
-import { useFonts } from "expo-font";
-
-import * as SplashScreen from "expo-splash-screen";
-
-SplashScreen.preventAutoHideAsync();
-
 export default SignupScreenAuth = ({ navigation, route }) => {
   const { email } = route.params;
-  const [fontsLoaded] = useFonts({
-    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
-    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
-  });
 
   const handleSubmit = () => {
     navigation.navigate("PreferenceScreen");
@@ -33,17 +23,8 @@ export default SignupScreenAuth = ({ navigation, route }) => {
     navigation.navigate("SignupScreenFill");
   };
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.pageContainer}>
         <View style={styles.pageHeader}>
           <Pressable onPress={() => navigation.navigate("GetStartedScreen")}>
