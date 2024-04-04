@@ -11,4 +11,5 @@ export default COLORS = {
   modalTextColor: "#039855",
   modalBgColor: "#ECFDF3",
   modalMessageTextColor: "#027A48",
+  profileImgBorderColor: "#CED5DC",
 };

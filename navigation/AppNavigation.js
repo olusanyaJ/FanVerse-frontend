@@ -1,3 +1,7 @@
+import React, { useCallback } from "react";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GetStartedScreen from "../screens/GetStartedScreen";
@@ -19,12 +23,31 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 import PlaceholderScreen from "../screens/PlaceholderScreen";
 import BottomTabNavigation from "./BottomTabNavigation";
+import ProfileTabNavigation from "./ProfileTabNavigation";
 
 const Stack = createNativeStackNavigator();
 
+SplashScreen.preventAutoHideAsync();
+
 export default appNaviagtion = () => {
+  const [fontsLoaded, fontError] = useFonts({
+    "Manrope-Light": require("../assets/fonts/Manrope-Light.ttf"),
+    "Manrope-Regular": require("../assets/fonts/Manrope-Regular.ttf"),
+    "Manrope-Bold": require("../assets/fonts/Manrope-Bold.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={onLayoutRootView}>
       <Stack.Navigator initialRouteName="OnboardingScreen">
         <Stack.Screen
           name="OnboardingScreen"
@@ -131,6 +154,12 @@ export default appNaviagtion = () => {
         <Stack.Screen
           name="BottomTabNavigation"
           component={BottomTabNavigation}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ProfileTabNavigation"
+          component={ProfileTabNavigation}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

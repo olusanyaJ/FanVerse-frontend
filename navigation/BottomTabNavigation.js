@@ -17,7 +17,12 @@ const Tab = createBottomTabNavigator();
 
 const screenOptions = {
   tabBarShowLabel: false,
-  headerShown: false,
+  headerShown: true,
+  headerTintColor: COLORS.buttonTextColor,
+  headerStyle: {
+    backgroundColor: COLORS.appBackgroundColor,
+    height: 100,
+  },
   tabBarHideOnKeyboard: true,
   tabBarStyle: {
     position: "absolute",
