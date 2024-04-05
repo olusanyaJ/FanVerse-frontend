@@ -48,7 +48,11 @@ export default ProfileTabNavigation = () => {
 
   return (
     <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen name="Your Posts" component={UserPostsTab} />
+      <Tab.Screen
+        name="Your Posts"
+        component={UserPostsTab}
+        options={{ upperCaseLabel: false }}
+      />
       <Tab.Screen name="Your Comments" component={UserCommentsTab} />
       <Tab.Screen name="Tags" component={TagsTab} />
     </Tab.Navigator>

@@ -5,15 +5,6 @@ export default Create = () => {
   return (
     <View style={styles.container}>
       <View style={styles.pageContainer}>
-        <View style={styles.pageHeader}>
-          <Pressable onPress={() => navigation.navigate("Home")}>
-            <Image
-              source={require("../assets/icons/x.png")}
-              style={styles.image}
-              resizeMode="contain"
-            />
-          </Pressable>
-        </View>
         <Text style={styles.text}>Create Screen</Text>
       </View>
     </View>
@@ -29,13 +20,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 24,
     marginTop: 44,
-  },
-  pageHeader: {
-    paddingVertical: 16,
-  },
-  image: {
-    width: 24,
-    height: 24,
   },
   text: {
     marginTop: 50,

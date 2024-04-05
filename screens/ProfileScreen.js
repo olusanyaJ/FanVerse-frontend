@@ -4,14 +4,15 @@ import Unorderedlist from "react-native-unordered-list";
 
 import POSTS from "../posts";
 import ProfileTabNavigation from "../navigation/ProfileTabNavigation";
-
 const post = POSTS[0];
+
+const iconFHD = require("../assets/imgs/Imagery.png");
 
 export default Profile = () => {
   return (
     <View style={styles.container}>
       <View style={styles.bioContainer}>
-        <Image src={post.user.profileImage} style={styles.profileImage} />
+        <Image source={iconFHD} style={styles.profileImage} />
         <View style={styles.bioName}>
           <Text style={styles.fullName}>{post.user.fullName}</Text>
           <Text style={styles.username}>@{post.user.username}</Text>

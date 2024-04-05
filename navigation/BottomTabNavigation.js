@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, Button } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import LivescoreScreen from "../screens/LivescoreScreen";
@@ -7,11 +7,15 @@ import CreateScreen from "../screens/CreateScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import COLORS from "../utils/colors";
-const homeIcon = require("../assets/icons/home.png");
 const liveIcon = require("../assets/icons/wave-saw-tool.png");
 const createIcon = require("../assets/icons/Frame.png");
-const notificationIcon = require("../assets/icons/notification.png");
-const profileIcon = require("../assets/icons/user.png");
+import Header from "../components/Header";
+import {
+  Feather,
+  FontAwesome5,
+  SimpleLineIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +26,8 @@ const screenOptions = {
   headerStyle: {
     backgroundColor: COLORS.appBackgroundColor,
     height: 100,
+    elevation: 0,
+    shadowOpacity: 0,
   },
   tabBarHideOnKeyboard: true,
   tabBarStyle: {
@@ -48,13 +54,13 @@ export default BottomTabNavigation = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={styles.iconContainer}>
-                <Image
-                  source={homeIcon}
-                  resizeMode="contain"
+                <MaterialCommunityIcons
+                  name="home-minus-outline"
+                  size={24}
                   style={[
                     styles.image,
                     {
-                      tintColor: focused
+                      color: focused
                         ? COLORS.primaryTextColor
                         : COLORS.secondaryTextColor,
                     },
@@ -137,6 +143,18 @@ export default BottomTabNavigation = () => {
               </View>
             );
           },
+          headerTitle: "",
+          headerLeft: () => (
+            <Feather
+              name="x"
+              size={28}
+              color="white"
+              style={styles.cancelIcon}
+              onPress={() => {
+                console.log("Pressed!");
+              }}
+            />
+          ),
         }}
       />
 
@@ -147,13 +165,13 @@ export default BottomTabNavigation = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={styles.iconContainer}>
-                <Image
-                  source={notificationIcon}
-                  resizeMode="contain"
+                <SimpleLineIcons
+                  name="bell"
+                  size={24}
                   style={[
                     styles.image,
                     {
-                      tintColor: focused
+                      color: focused
                         ? COLORS.primaryTextColor
                         : COLORS.secondaryTextColor,
                     },
@@ -184,13 +202,13 @@ export default BottomTabNavigation = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={styles.iconContainer}>
-                <Image
-                  source={profileIcon}
-                  resizeMode="contain"
+                <FontAwesome5
+                  name="user"
+                  size={24}
                   style={[
                     styles.image,
                     {
-                      tintColor: focused
+                      color: focused
                         ? COLORS.primaryTextColor
                         : COLORS.secondaryTextColor,
                     },
@@ -211,6 +229,29 @@ export default BottomTabNavigation = () => {
               </View>
             );
           },
+          headerTitle: () => <Header />,
+          headerLeft: () => (
+            <Feather
+              name="x"
+              size={28}
+              color="white"
+              style={styles.cancelIcon}
+              onPress={() => {
+                console.log("Pressed!");
+              }}
+            />
+          ),
+          headerRight: () => (
+            <Feather
+              name="edit-2"
+              size={24}
+              color="white"
+              style={styles.editIcon}
+              onPress={() => {
+                console.log("Pressed!");
+              }}
+            />
+          ),
         }}
       />
     </Tab.Navigator>
@@ -245,5 +286,13 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     lineHeight: 20.4,
     letterSpacing: 0.20000000298023224,
+  },
+  cancelIcon: {
+    position: "absolute",
+    left: 24,
+  },
+  editIcon: {
+    position: "absolute",
+    right: 24,
   },
 });
