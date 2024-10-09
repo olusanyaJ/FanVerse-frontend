@@ -5,16 +5,16 @@ import SignInWithBtn from "../components/SignInWithBtn";
 import COLORS from "../utils/colors";
 
 export default GetStartedScreen = ({ navigation }) => {
-  const onPressEmail = () => {
-    navigation.navigate("LoginScreen");
-  };
+  // const onPressEmail = () => {
+  //   navigation.navigate("LoginScreen");
+  // };
 
-  const onPressGoogle = () => {
-    navigation.navigate("LoginScreen");
-  };
-  const onPressApple = () => {
-    navigation.navigate("LoginScreen");
-  };
+  // const onPressGoogle = () => {
+  //   navigation.navigate("LoginScreen");
+  // };
+  // const onPressApple = () => {
+  //   navigation.navigate("LoginScreen");
+  // };
 
   return (
     <View style={styles.container}>
@@ -41,18 +41,20 @@ export default GetStartedScreen = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.btnContainer}>
-          <Button onPress={onPressEmail} buttonText={"Continue with Email"} />
+          <Button 
+          // onPress={onPressEmail} 
+          buttonText={"Continue with Email"} />
         </View>
         <View style={styles.btnContainerMG}>
           <SignInWithBtn
-            onPress={onPressGoogle}
+            // onPress={onPressGoogle}
             buttonText={"Continue with Google"}
             icon={require("../assets/icons/Google.png")}
           />
         </View>
         <View style={styles.btnContainerMG}>
           <SignInWithBtn
-            onPress={onPressApple}
+            // onPress={onPressApple}
             buttonText={"Continue with Apple"}
             icon={require("../assets/icons/Apple.png")}
           />
@@ -68,6 +70,7 @@ export default GetStartedScreen = ({ navigation }) => {
   );
 };
 
+/*
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -170,3 +173,5 @@ const styles = StyleSheet.create({
     color: COLORS.thirdTextColor,
   },
 });
+
+*/
